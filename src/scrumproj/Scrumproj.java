@@ -16,6 +16,8 @@ public class Scrumproj {
      */
     public static void main(String[] args) {
         // TODO code application logic here
+        SokAnvandare sok = new SokAnvandare();
+        sok.setVisible(true);
     }
     
 }
