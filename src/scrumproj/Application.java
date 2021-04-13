@@ -64,8 +64,7 @@ public class Application extends JFrame {
         setLayout(null);
 
         // Lägger till alla sidor med hjälp av metoden addPage
-        //EXEMPEL PÅ HUR DU LÄGGER TILL EN SIDA: addPage(new SokAnvandare(this));
-        //0
+        //addPage(new SokAnvandare(this)); //0
         
                 setVisible(true);
     }
