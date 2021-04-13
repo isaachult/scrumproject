@@ -16,8 +16,9 @@ public class Scrumproj {
      */
     public static void main(String[] args) {
         // TODO code application logic here
-        SokAnvandare sok = new SokAnvandare();
-        sok.setVisible(true);
+        Application app = new Application("Scrum & XP Project", 640, 640);
+        app.init();
+        app.run();
     }
     
 }
