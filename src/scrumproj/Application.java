@@ -65,10 +65,11 @@ public class Application extends JFrame {
 
         // Lägger till alla sidor med hjälp av metoden addPage
         //addPage(new SokAnvandare(this)); //0
-        addPage(new AdminMeny(this)); //0
-        addPage(new RegistreraAnvandare(this)); //1
-        addPage(new TaBortAnvandare(this)); //2
-         addPage(new AnvandarMeny(this));//3
+        addPage(new Inloggning(this)); //0
+        addPage (new AdminMeny(this));  //1
+        addPage(new RegistreraAnvandare(this)); //2
+        addPage(new TaBortAnvandare(this)); //3
+         addPage(new AnvandarMeny(this));//4
         
          
         
@@ -107,5 +108,20 @@ public class Application extends JFrame {
     //Returnerar InfDB-objektet
     public InfDB getDataBaseConnection() {
         return dataBaseConnection;
+    }
+    private int currentUser;{
+    currentUser = 0;}
+    
+    public void logInUser(int id) {
+        currentUser = id;
+        System.out.println("User logged in: id = " + currentUser);
+    }
+    //Loggar ut ur systemet, nollställer ID och användartyp
+    public void logOut() {
+        currentUser = 0;
+        System.out.println("User logged out: id = " + currentUser);
+    }
+    public int getCurrentUser() {
+        return currentUser;
     }
 }
