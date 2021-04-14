@@ -107,4 +107,16 @@ public class Application extends JFrame {
     public InfDB getDataBaseConnection() {
         return dataBaseConnection;
     }
+    private int currentUser;{
+    currentUser = 0;}
+    
+    public void logInUser(int id) {
+        currentUser = id;
+        System.out.println("User logged in: id = " + currentUser);
+    }
+    //Loggar ut ur systemet, nollställer ID och användartyp
+    public void logOut() {
+        currentUser = 0;
+        System.out.println("User logged out: id = " + currentUser);
+    }
 }

@@ -132,7 +132,7 @@ public class Inloggning extends Page {
 
                     if (losenord.equals(correctPassword)) {
                         String id = app.getDataBaseConnection().fetchSingle("SELECT ANVANDAR_ID FROM ANVANDARE WHERE EPOST = '" + epost + "'");
-
+                        app.logInUser(Integer.parseInt(id));
                         app.selectPage(4);
                         resetComponents();
                     }
@@ -155,8 +155,8 @@ public class Inloggning extends Page {
                     String correctPassword = app.getDataBaseConnection().fetchSingle("SELECT LOSENORD FROM ANVANDARE WHERE EPOST = '" + epost + "'");
 
                     if (losenord.equals(correctPassword) && adminstatus.equals("J")) {
-                        //String id = app.getDataBaseConnection().fetchSingle("SELECT ANVANDAR_ID FROM ANVANDARE WHERE EPOST = '" + epost + "'");
-
+                        String id = app.getDataBaseConnection().fetchSingle("SELECT ANVANDAR_ID FROM ANVANDARE WHERE EPOST = '" + epost + "'");
+                        app.logInUser(Integer.parseInt(id));
                         app.selectPage(1);
                         resetComponents();
                     }
