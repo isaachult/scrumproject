@@ -11,7 +11,7 @@ public class Inloggning extends Page {
 
     public Inloggning(Application app) {
         super(app);
-         
+        initComponents();
     }
     @Override
     public void updateInfo() { }
@@ -26,6 +26,9 @@ public class Inloggning extends Page {
         LoggaIn = new javax.swing.JButton();
         textLosenord = new javax.swing.JPasswordField();
         Besokare = new javax.swing.JComboBox<>();
+
+        setMaximumSize(new java.awt.Dimension(640, 640));
+        setMinimumSize(new java.awt.Dimension(640, 640));
 
         textEpost.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -70,7 +73,7 @@ public class Inloggning extends Page {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(118, 118, 118)
                         .addComponent(jLabel1)))
-                .addGap(0, 127, Short.MAX_VALUE))
+                .addGap(0, 462, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
@@ -90,7 +93,7 @@ public class Inloggning extends Page {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(24, Short.MAX_VALUE)
+                .addContainerGap(393, Short.MAX_VALUE)
                 .addComponent(Besokare, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jLabel1)
@@ -116,7 +119,7 @@ public class Inloggning extends Page {
             return; }
     
 
-                String epost = Validering.formatNameUpperCase(textEpost.getText());
+                String epost = textEpost.getText();
                 String losenord = new String(textLosenord.getPassword());
                 
                 switch (Besokare.getSelectedIndex()) {
@@ -130,7 +133,7 @@ public class Inloggning extends Page {
                     if (losenord.equals(correctPassword)) {
                         String id = app.getDataBaseConnection().fetchSingle("SELECT ANVANDAR_ID FROM ANVANDARE WHERE EPOST = '" + epost + "'");
 
-                        app.selectPage(3);
+                        app.selectPage(4);
                         resetComponents();
                     }
 
@@ -148,13 +151,13 @@ public class Inloggning extends Page {
                {
                 // Admin
                 try {
-                    String adminstatus = app.getDataBaseConnection().fetchSingle("SELECT ADMINSTATUS FROM ANVANDARE WHERE EPOST = " + epost + "");
+                    String adminstatus = app.getDataBaseConnection().fetchSingle("SELECT ADMINSTATUS FROM ANVANDARE WHERE EPOST = '" + epost + "'");
                     String correctPassword = app.getDataBaseConnection().fetchSingle("SELECT LOSENORD FROM ANVANDARE WHERE EPOST = '" + epost + "'");
 
                     if (losenord.equals(correctPassword) && adminstatus.equals("J")) {
-                        String id = app.getDataBaseConnection().fetchSingle("SELECT ANVANDAR_ID FROM ANVANDARE WHERE EPOST = '" + epost + "'");
+                        //String id = app.getDataBaseConnection().fetchSingle("SELECT ANVANDAR_ID FROM ANVANDARE WHERE EPOST = '" + epost + "'");
 
-                        app.selectPage(0);
+                        app.selectPage(1);
                         resetComponents();
                     }
 

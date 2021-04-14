@@ -63,11 +63,11 @@ public class AdminMeny extends Page {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        app.selectPage(1);
+        app.selectPage(2);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        app.selectPage(2);
+        app.selectPage(3);
     }//GEN-LAST:event_jButton2ActionPerformed
 
 
