@@ -70,6 +70,7 @@ public class Application extends JFrame {
         addPage(new RegistreraAnvandare(this)); //2
         addPage(new TaBortAnvandare(this)); //3
          addPage(new AnvandarMeny(this));//4
+         addPage(new FormellBlogg(this));//5
         
                 setVisible(true);
     }
