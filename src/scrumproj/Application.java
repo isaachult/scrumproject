@@ -70,6 +70,8 @@ public class Application extends JFrame {
         addPage(new TaBortAnvandare(this)); //2
          addPage(new AnvandarMeny(this));//3
         
+         
+        
                 setVisible(true);
     }
     
