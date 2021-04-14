@@ -1,9 +1,13 @@
 package scrumproj;
 
+import java.text.ParseException;
+import oru.inf.InfDB;
 import java.util.Date;
 import javax.swing.JOptionPane;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
+import oru.inf.InfException;
+import java.text.SimpleDateFormat;
 
 /**
  *
@@ -142,28 +146,25 @@ public static String formatNameUpperCase(String nameInput) {
         }
         return name;
     }
-public static boolean isValidPasswordCharacterLength(String input)
-    {
-        if (input.length() <= 12) {
-            return true;
-        }
+//public static boolean isValidPasswordCharacterLength(String input)
+   // {
+        //if (input.length() <= 12) {
+          //  return true;
+        
 
-        else
-        {
-            return false;
-        }
-    }
-public static boolean isValidDate(String input, String format) {
+       // else
+       // {
+          //  return false;
+     //   }
+   // }
+//public static boolean isValidDate(String input, String format) {
 
-        SimpleDateFormat dateFormat = new SimpleDateFormat(format);
+        //SimpleDateFormat dateFormat = new SimpleDateFormat(format);
 
-        try {
-            Date date = dateFormat.parse(input);
-        } catch (ParseException e) {
-            return false;
-        }
-import java.util.Date;
-import java.text.SimpleDateFormat;
-yyyy-MM-dd
-}
+        //try {
+            //Date date = dateFormat.parse(input);
+        //} catch (ParseException e) {
+         //   return false;
+      //  }
+
 }

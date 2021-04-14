@@ -33,7 +33,7 @@ public class Application extends JFrame {
         boolean connected = false;
         
         try {
-            dataBaseConnection = new InfDB("C:\\db\\MIBDB.FDB");
+            dataBaseConnection = new InfDB("C:\\db\\scrum.FDB");
             connected = true;
         } catch(InfException e) { 
             System.err.println("Kunde inte koppla upp till databasen. Om du använder Mac så kan detta meddelande ignoreras");
@@ -43,7 +43,7 @@ public class Application extends JFrame {
         if (dataBaseConnection == null) {
             try {
                 String name = JOptionPane.showInputDialog("Skriv namnet på din användare: ");
-                dataBaseConnection = new InfDB("/Users/" + name + "/db/MIBDB.FDB");
+                dataBaseConnection = new InfDB("/Users/" + name + "/db/scrum.FDB");
                 connected = true;
             } catch(InfException e) {
                 System.err.println("Kunde inte koppla upp till databasen");
@@ -65,6 +65,10 @@ public class Application extends JFrame {
 
         // Lägger till alla sidor med hjälp av metoden addPage
         //addPage(new SokAnvandare(this)); //0
+        addPage(new AdminMeny(this)); //0
+        addPage(new RegistreraAnvandare(this)); //1
+        addPage(new TaBortAnvandare(this)); //2
+         addPage(new AnvandarMeny(this));//3
         
                 setVisible(true);
     }
