@@ -119,4 +119,7 @@ public class Application extends JFrame {
         currentUser = 0;
         System.out.println("User logged out: id = " + currentUser);
     }
+    public int getCurrentUser() {
+        return currentUser;
+    }
 }
