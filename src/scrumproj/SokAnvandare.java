@@ -7,6 +7,7 @@ package scrumproj;
 
 import javax.swing.JOptionPane;
 import oru.inf.InfException;
+import java.util.ArrayList;
 /**
  *
  * @author alryd
@@ -22,7 +23,29 @@ public class SokAnvandare extends Page {
     }
     
     @Override
-    public void updateInfo() { }
+    public void updateInfo() { 
+    
+        String fraga = "SELECT fornamn FROM anvandare";
+
+        ArrayList<String> allaAnvandarNamn;
+            cboxAnvandare.removeAllItems();
+
+        try {
+            allaAnvandarNamn = app.getDataBaseConnection().fetchColumn(fraga); // hämta alla användarnamn
+            //En for loop som lägger in användarnas namn för vare instans som uppstår.
+            for (String namn : allaAnvandarNamn) {
+                cboxAnvandare.addItem(namn);
+            }
+
+        } catch (InfException e) {
+            JOptionPane.showMessageDialog(null, e);
+        } catch (Exception ettUndantag) {
+            JOptionPane.showMessageDialog(null, "Ett fel uppstod!");
+            System.out.println("Internt felmeddelande" + ettUndantag.getMessage());
+        }
+    }
+    
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -33,86 +56,51 @@ public class SokAnvandare extends Page {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jbtnSokAnvandare = new javax.swing.JButton();
-        jtxtFieldForNamn = new javax.swing.JTextField();
-        jtxtFieldEfterNamn = new javax.swing.JTextField();
-        jlblForNamn = new javax.swing.JLabel();
-        jlblEfterNamn = new javax.swing.JLabel();
+        cboxAnvandare = new javax.swing.JComboBox<>();
+        btnSok = new javax.swing.JButton();
 
-        jbtnSokAnvandare.setText("Sök");
-        jbtnSokAnvandare.addActionListener(new java.awt.event.ActionListener() {
+        cboxAnvandare.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
+        btnSok.setText("Sök");
+        btnSok.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jbtnSokAnvandareActionPerformed(evt);
+                btnSokActionPerformed(evt);
             }
         });
-
-        jlblForNamn.setText("Förnamn");
-
-        jlblEfterNamn.setText("Efternamn");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(110, 110, 110)
-                .addComponent(jtxtFieldForNamn, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 31, Short.MAX_VALUE)
-                .addComponent(jtxtFieldEfterNamn, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(134, 134, 134))
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(153, 153, 153)
-                        .addComponent(jbtnSokAnvandare, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(125, 125, 125)
-                        .addComponent(jlblForNamn)
-                        .addGap(52, 52, 52)
-                        .addComponent(jlblEfterNamn)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(157, 157, 157)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(cboxAnvandare, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnSok, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(169, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(26, 26, 26)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jlblForNamn)
-                    .addComponent(jlblEfterNamn))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jtxtFieldForNamn)
-                    .addComponent(jtxtFieldEfterNamn))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jbtnSokAnvandare)
-                .addContainerGap(200, Short.MAX_VALUE))
+                .addGap(66, 66, 66)
+                .addComponent(cboxAnvandare, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(35, 35, 35)
+                .addComponent(btnSok)
+                .addContainerGap(170, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jbtnSokAnvandareActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnSokAnvandareActionPerformed
+    private void btnSokActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSokActionPerformed
         // TODO add your handling code here:
-        String forNamn = jtxtFieldForNamn.getText();
-        String efterNamn = jtxtFieldEfterNamn.getText();
+        String valtNamn = cboxAnvandare.getSelectedItem().toString();
+        JOptionPane.showMessageDialog(null, "PLACEHOLDER: " + valtNamn + "s profil");
         
-        try
-        {
-            String fraga = "SELECT ANVANDAR_ID FROM ANVANDARE WHERE FORNAMN ='" + forNamn + "'" + "AND EFTERNAMN ='" + efterNamn + "'";
-            String resultat = app.getDataBaseConnection().fetchSingle(fraga);
-            JOptionPane.showMessageDialog(null, resultat);
-        }
-        catch (InfException e)
-        {
-            JOptionPane.showMessageDialog(null, "Något blev fel, försök igen!");
-            System.err.println(e);
-        }
-    }//GEN-LAST:event_jbtnSokAnvandareActionPerformed
+    }//GEN-LAST:event_btnSokActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jbtnSokAnvandare;
-    private javax.swing.JLabel jlblEfterNamn;
-    private javax.swing.JLabel jlblForNamn;
-    private javax.swing.JTextField jtxtFieldEfterNamn;
-    private javax.swing.JTextField jtxtFieldForNamn;
+    private javax.swing.JButton btnSok;
+    private javax.swing.JComboBox<String> cboxAnvandare;
     // End of variables declaration//GEN-END:variables
 }
+
