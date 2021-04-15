@@ -8,7 +8,6 @@ import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import oru.inf.InfException;
 import java.text.SimpleDateFormat;
-import javax.swing.JTextArea;
 
 /**
  *
@@ -29,20 +28,6 @@ public class Validering {
 
         return resultat;
     }
-    
-    public static boolean taHarVarde(JTextArea rutaAttKolla) {
-
-        boolean resultat = true;
-
-        if (rutaAttKolla.getText().isEmpty()) {
-            JOptionPane.showMessageDialog(null, "En eller flera textrutor är tomma!");
-            rutaAttKolla.requestFocus();
-            resultat = false;
-        }
-
-        return resultat;
-    }
-    
 
     public static boolean tfIsTomt(JTextField rutaAttKolla) {
 
