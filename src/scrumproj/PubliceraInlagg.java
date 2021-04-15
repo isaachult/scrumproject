@@ -33,17 +33,7 @@ public class PubliceraInlagg extends Page {
 
     @Override
     public void updateInfo(){
-    try {
-        
-        
     }
-    
-    catch(InfException e) {
-        
-    }
-    
-    }
-    
     
     
 
