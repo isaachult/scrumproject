@@ -25,21 +25,21 @@ public class SokAnvandare extends Page {
     @Override
     public void updateInfo() { 
     
-        String fraga = "SELECT fornamn FROM anvandare";
-        String fraga2 = "SELECT efternamn FROM anvandare";
+        String fraga = "SELECT anvandar_id FROM anvandare";
         
 
-        ArrayList<String> allaNamn;
+        ArrayList<String> allaAnvandare;
             cboxAnvandare.removeAllItems();
             
 
         try {
-            allaNamn = app.getDataBaseConnection().fetchColumn(fraga); // hämta alla användarnamn
+            allaAnvandare = app.getDataBaseConnection().fetchColumn(fraga); // hämta alla användarnamn
             
-            //En for loop som lägger in användarnas namn för vare instans som uppstår.
-            for (String namn : allaNamn) {
-                String efterNamn = app.getDataBaseConnection().fetchSingle("SELECT efternamn FROM anvandare WHERE fornamn = '" + namn + "'");
-                cboxAnvandare.addItem(namn + " " + efterNamn);
+            //En for loop som lägger in användarnas id för vare instans som uppstår.
+            for (String id : allaAnvandare) {
+                String forNamn = app.getDataBaseConnection().fetchSingle("SELECT fornamn FROM anvandare WHERE anvandar_id = '" + id + "'");
+                String efterNamn = app.getDataBaseConnection().fetchSingle("SELECT efternamn FROM anvandare WHERE anvandar_id = '" + id + "'");
+                cboxAnvandare.addItem(forNamn + " " + efterNamn);
             }
            
 
