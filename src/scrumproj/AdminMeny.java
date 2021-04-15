@@ -103,7 +103,7 @@ public class AdminMeny extends Page {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        app.selectPage(1);
+        app.selectPage(2);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
@@ -117,7 +117,7 @@ public class AdminMeny extends Page {
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         // TODO add your handling code here:
-        app.selectPage(4);
+        app.selectPage(5);
     }//GEN-LAST:event_jButton4ActionPerformed
 
 
