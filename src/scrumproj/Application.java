@@ -64,13 +64,17 @@ public class Application extends JFrame {
         setLayout(null);
 
         // Lägger till alla sidor med hjälp av metoden addPage
-        //addPage(new SokAnvandare(this)); //0
+        
         addPage(new Inloggning(this)); //0
         addPage (new AdminMeny(this));  //1
         addPage(new RegistreraAnvandare(this)); //2
         addPage(new TaBortAnvandare(this)); //3
          addPage(new AnvandarMeny(this));//4
-         addPage(new FormellBlogg(this));//5
+         addPage(new SokAnvandare(this));//5
+         addPage(new PubliceraInlagg(this));//6
+       
+        addPage(new FormellBlogg(this));//9
+         
         
                 setVisible(true);
     }
