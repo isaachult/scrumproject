@@ -2,25 +2,86 @@ package scrumproj;
 
 import javax.swing.JOptionPane;
 import oru.inf.InfException;
-import java.time.LocalDateTime;   
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashMap;
+import javax.swing.DefaultListModel;
+import javax.swing.table.DefaultTableModel;
 
-/**
- *
- * @author Tor
- */
+;
+
 public class FormellBlogg extends Page {
 
-   
-    public FormellBlogg (Application app) {
+    public FormellBlogg(Application app) {
         super(app);
-        
         initComponents();
     }
 
     @Override
-    public void updateInfo() { 
-    
+    public void updateInfo() {
+        
+        
+        try {
+            DefaultTableModel table = new DefaultTableModel(new Object[]{"ANVANDARE", "INLAGG", "DATUM"}, 0);
+
+            ArrayList<HashMap<String, String>> allaRader = new ArrayList<>();
+            allaRader = app.getDataBaseConnection().fetchRows("SELECT INLAGG_ID, ANVANDARE, INLAGG, DATUM FROM FORMELBLOGG");
+
+            for (HashMap<String, String> rad : allaRader) {
+                String inlagg_id = rad.get("INLAGG_ID");
+                String anvandare = rad.get("ANVANDARE");
+                String inlagg = rad.get("INLAGG");
+                String datum = rad.get("DATUM");
+
+                //Sätter in anvandare + inlagg + datum  i tabellen mha addRow()
+                table.addRow(new Object[]{anvandare, inlagg, datum});
+            }
+
+            //Säger att tblInlagg ska använda sig av den modellen vi skapade ovan
+            tblInlagg.setModel(table);
+
+            //Sätter defaultEditor till Object.class, null för att data i tabellen inte ska kunna redigeras, men kunna selekteras.
+            tblInlagg.setDefaultEditor(Object.class, null);
+
+            //Stänger av möjligheten att ändra kolumnordningen.
+            tblInlagg.getTableHeader().setReorderingAllowed(false);
+
+            //Sätter bredden på kolumnen som innehåller ID till 0px.
+            //Vi vill inte att ID ska visas i listan men vill eventueltl kunna använda IDt 
+            tblInlagg.getColumnModel().getColumn(3).setMinWidth(0);
+            tblInlagg.getColumnModel().getColumn(3).setMaxWidth(0);
+            tblInlagg.getColumnModel().getColumn(3).setWidth(0);
+
+        } catch (InfException e) {
+            JOptionPane.showMessageDialog(null, "Något är fel");
+            System.err.println(e);
+        }
+
+        // Kod nedanför är för  jList, ser inte lika bra ut
+        //
+        //
+/*
+        try {
+            DefaultListModel inlaggModel = new DefaultListModel(); //create a new list model
+            ArrayList<HashMap<String, String>> arr;
+
+            arr = app.getDataBaseConnection().fetchRows("SELECT ANVANDARE, INLAGG, DATUM FROM FORMELBLOGG");
+
+            for (HashMap<String, String> inlagg : arr) {
+                inlaggModel.addElement(inlagg);
+                inlaggList.setModel(inlaggModel);
+            }
+
+        } catch (InfException e) {
+            JOptionPane.showMessageDialog(null, "Något är fel");
+            System.err.println(e);
+        }
+         */
     }
+
+
+    
     
     /**
      * This method is called from within the constructor to initialize the form.
@@ -31,26 +92,62 @@ public class FormellBlogg extends Page {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        btnPubliceraInlagg = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
+        jButton1 = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        inlaggsArean = new javax.swing.JTextArea();
+        btnPublicera = new javax.swing.JButton();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        inlaggList = new javax.swing.JList<>();
         jScrollPane4 = new javax.swing.JScrollPane();
-        InlaggsRutan = new javax.swing.JTextArea();
+        tblInlagg = new javax.swing.JTable();
 
-        btnPubliceraInlagg.setText("Publicera inlägg");
-        btnPubliceraInlagg.addActionListener(new java.awt.event.ActionListener() {
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane3.setViewportView(jTable1);
+
+        jButton1.setText("Lägg till kategori");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnPubliceraInlaggActionPerformed(evt);
+                jButton1ActionPerformed(evt);
             }
         });
 
-        jButton2.setText("Gå tillbaka");
+        inlaggsArean.setColumns(20);
+        inlaggsArean.setRows(5);
+        jScrollPane1.setViewportView(inlaggsArean);
 
-        jButton3.setText("Profil");
+        btnPublicera.setText("Publicera");
+        btnPublicera.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPubliceraActionPerformed(evt);
+            }
+        });
 
-        InlaggsRutan.setColumns(20);
-        InlaggsRutan.setRows(5);
-        jScrollPane4.setViewportView(InlaggsRutan);
+        jScrollPane2.setViewportView(inlaggList);
+
+        tblInlagg.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane4.setViewportView(tblInlagg);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -58,62 +155,88 @@ public class FormellBlogg extends Page {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jButton2)
-                .addGap(89, 89, 89)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(btnPubliceraInlagg)
-                    .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 229, Short.MAX_VALUE)
-                .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jButton1)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 735, Short.MAX_VALUE)))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnPublicera, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 221, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(25, 25, 25))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton2)
-                    .addComponent(jButton3))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnPubliceraInlagg)
-                .addContainerGap(234, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(65, 65, 65)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnPublicera))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addComponent(jButton1)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(38, 38, 38)
+                                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 247, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                .addContainerGap(192, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnPubliceraInlaggActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPubliceraInlaggActionPerformed
-      
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        app.selectPage(8);
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void btnPubliceraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPubliceraActionPerformed
+
+        //JAG HAR ÄNDRAT DATATYPE "TIME" FÖR TIDSTÄMPELN TILL "DATE" I DATABASEN //TOR
+        
         try {
-            if (!Validering.taHarVarde(InlaggsRutan)) {
 
-            } else {
-                String Inlagget = InlaggsRutan.getText();
-                LocalDateTime tiden = LocalDateTime.now();
-                int anvandare = app.getCurrentUser();
-                var anvandaren = app.getDataBaseConnection().fetchSingle("SELECT FORNAMN FROM ANVANDARE WHERE ANVANDAR_ID= ''" + anvandare + "'");
+            String txt = inlaggsArean.getText();
 
-                String id = app.getDataBaseConnection().getAutoIncrement("FORMELBLOGG", "INLAGG_ID");
-                if (id == null) {
-                    id = "1";
-                }
+            String p = "yyyy-MM-dd";
+            SimpleDateFormat simpleDateFormat = new SimpleDateFormat(p);
+            String date = simpleDateFormat.format(new Date());
+            int anvandarId = app.getCurrentUser();
+            String namn = app.getDataBaseConnection().fetchSingle("SELECT FORNAMN FROM ANVANDARE WHERE ANVANDAR_ID= '" + anvandarId + "'");
 
-                String inlagg = app.getDataBaseConnection().fetchSingle("INSERT INTO FORMELBLOGG (ANVANDARE, INLAGG_ID, TIDSTAMPEL, INLAGG) VALUES (''" + anvandaren + "','" + id + "','" + tiden + "','" + Inlagget + "')");
-                JOptionPane.showMessageDialog(null, "Du har nu publicerat ditt inlägg!");
+            String inlaggId = app.getDataBaseConnection().getAutoIncrement("FORMELBLOGG", "INLAGG_ID");
+            if (inlaggId == null) {
+                inlaggId = "1";
             }
+           
+            String dbStatment = app.getDataBaseConnection().fetchSingle("INSERT INTO FORMELBLOGG (ANVANDARE, INLAGG_ID, INLAGG, DATUM) VALUES ('"+namn+"', '"+inlaggId+"', '"+txt+"', '"+date+"');");
+            inlaggsArean.setText(null);
+            JOptionPane.showMessageDialog(null, "Inlägg publicerat");
+            updateInfo();
+            
+ 
+
         } catch (InfException e) {
-            JOptionPane.showMessageDialog(null, "Något blev fel, försök igen!");
+            JOptionPane.showMessageDialog(null, "Något är ju fel");
             System.err.println(e);
         }
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnPubliceraInlaggActionPerformed
+    }//GEN-LAST:event_btnPubliceraActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTextArea InlaggsRutan;
-    private javax.swing.JButton btnPubliceraInlagg;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
+    private javax.swing.JButton btnPublicera;
+    private javax.swing.JList<String> inlaggList;
+    private javax.swing.JTextArea inlaggsArean;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
+    private javax.swing.JTable jTable1;
+    private javax.swing.JTable tblInlagg;
     // End of variables declaration//GEN-END:variables
 }
