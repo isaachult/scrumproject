@@ -21,7 +21,7 @@ public class AnvandarMeny extends Page {
         try {
     int inloggadId = app.getCurrentUser();
     String namn = app.getDataBaseConnection().fetchSingle("SELECT FORNAMN FROM ANVANDARE WHERE ANVANDAR_ID= '" + inloggadId + "'"); 
-    jLabel1.setText("Välkommen" + " " +namn+ "!");
+    txtProfile.setText("Välkommen" + " " +namn+ "!");
     }
         catch(InfException e) {
             
@@ -38,13 +38,43 @@ public class AnvandarMeny extends Page {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jButton1 = new javax.swing.JButton();
-        jLabel1 = new javax.swing.JLabel();
+        txtProfile = new javax.swing.JLabel();
+        btnInformellBlogg = new javax.swing.JButton();
+        btnFormellBlogg = new javax.swing.JButton();
+        btnLogout = new javax.swing.JButton();
+        btnKalender = new javax.swing.JButton();
+        btnKontouppgifter = new javax.swing.JButton();
 
-        jButton1.setText("Lägg till kategori");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        setMaximumSize(new java.awt.Dimension(640, 640));
+        setMinimumSize(new java.awt.Dimension(640, 640));
+
+        btnInformellBlogg.setText("Informell Blogg");
+        btnInformellBlogg.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btnInformellBloggActionPerformed(evt);
+            }
+        });
+
+        btnFormellBlogg.setText("Formell Blogg");
+        btnFormellBlogg.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnFormellBloggActionPerformed(evt);
+            }
+        });
+
+        btnLogout.setText("Logga ut");
+        btnLogout.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLogoutActionPerformed(evt);
+            }
+        });
+
+        btnKalender.setText("Kalender");
+
+        btnKontouppgifter.setText("Ändra kontouppgifter");
+        btnKontouppgifter.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnKontouppgifterActionPerformed(evt);
             }
         });
 
@@ -53,33 +83,63 @@ public class AnvandarMeny extends Page {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(45, 45, 45)
-                        .addComponent(jButton1))
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(224, Short.MAX_VALUE))
+                .addGap(219, 219, 219)
+                .addComponent(txtProfile, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 139, Short.MAX_VALUE)
+                .addComponent(btnLogout)
+                .addGap(68, 68, 68))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(204, 204, 204)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(btnFormellBlogg, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnKalender, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnInformellBlogg, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnKontouppgifter, javax.swing.GroupLayout.DEFAULT_SIZE, 203, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel1)
-                .addGap(133, 133, 133)
-                .addComponent(jButton1)
-                .addContainerGap(129, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txtProfile, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnLogout))
+                .addGap(36, 36, 36)
+                .addComponent(btnKalender)
+                .addGap(18, 18, 18)
+                .addComponent(btnFormellBlogg)
+                .addGap(18, 18, 18)
+                .addComponent(btnInformellBlogg)
+                .addGap(18, 18, 18)
+                .addComponent(btnKontouppgifter)
+                .addContainerGap(424, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-       // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+    private void btnInformellBloggActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInformellBloggActionPerformed
+        app.selectPage(7);
+    }//GEN-LAST:event_btnInformellBloggActionPerformed
+
+    private void btnFormellBloggActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFormellBloggActionPerformed
+        app.selectPage(9);
+    }//GEN-LAST:event_btnFormellBloggActionPerformed
+
+    private void btnLogoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLogoutActionPerformed
+        app.logOut();
+        app.selectPage(0);
+    }//GEN-LAST:event_btnLogoutActionPerformed
+
+    private void btnKontouppgifterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnKontouppgifterActionPerformed
+        app.selectPage(10);
+    }//GEN-LAST:event_btnKontouppgifterActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JButton btnFormellBlogg;
+    private javax.swing.JButton btnInformellBlogg;
+    private javax.swing.JButton btnKalender;
+    private javax.swing.JButton btnKontouppgifter;
+    private javax.swing.JButton btnLogout;
+    private javax.swing.JLabel txtProfile;
     // End of variables declaration//GEN-END:variables
 }

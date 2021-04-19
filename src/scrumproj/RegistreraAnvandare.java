@@ -245,7 +245,7 @@ public class RegistreraAnvandare extends Page {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-app.selectPage(0);        // TODO add your handling code here:
+app.selectPage(1);        // TODO add your handling code here:
     }//GEN-LAST:event_jButton2ActionPerformed
 
 
