@@ -9,8 +9,6 @@ import java.util.HashMap;
 import javax.swing.DefaultListModel;
 import javax.swing.table.DefaultTableModel;
 
-;
-
 public class FormellBlogg extends Page {
 
     public FormellBlogg(Application app) {

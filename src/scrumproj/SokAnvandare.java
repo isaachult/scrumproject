@@ -65,7 +65,7 @@ public class SokAnvandare extends Page {
         cboxAnvandare = new javax.swing.JComboBox<>();
         btnSok = new javax.swing.JButton();
         lblValjAnvandare = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        btnFormell = new javax.swing.JButton();
 
         cboxAnvandare.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
@@ -78,10 +78,10 @@ public class SokAnvandare extends Page {
 
         lblValjAnvandare.setText("Välj användare");
 
-        jButton1.setText("Formellblogg");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnFormell.setText("Formell");
+        btnFormell.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btnFormellActionPerformed(evt);
             }
         });
 
@@ -92,23 +92,25 @@ public class SokAnvandare extends Page {
             .addGroup(layout.createSequentialGroup()
                 .addGap(157, 157, 157)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblValjAnvandare)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(lblValjAnvandare)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 77, Short.MAX_VALUE)
+                        .addComponent(btnFormell))
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                         .addComponent(cboxAnvandare, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btnSok, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addContainerGap(155, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton1)
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(13, 13, 13)
-                .addComponent(jButton1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(lblValjAnvandare)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(41, 41, 41)
+                        .addComponent(lblValjAnvandare))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(22, 22, 22)
+                        .addComponent(btnFormell)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(cboxAnvandare, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(35, 35, 35)
@@ -130,11 +132,15 @@ public class SokAnvandare extends Page {
         app.selectPage(7);
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    private void btnFormellActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFormellActionPerformed
+app.selectPage(9);        // TODO add your handling code here:
+    }//GEN-LAST:event_btnFormellActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnFormell;
     private javax.swing.JButton btnSok;
     private javax.swing.JComboBox<String> cboxAnvandare;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel lblValjAnvandare;
     // End of variables declaration//GEN-END:variables
 }
