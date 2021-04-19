@@ -75,6 +75,9 @@ public class Application extends JFrame {
          addPage(new InformellBlogg(this));//7
           addPage(new SkapaKategoriInformell(this));//8
         addPage(new FormellBlogg(this));//9
+        
+        
+        
          
         
                 setVisible(true);

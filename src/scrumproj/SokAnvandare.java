@@ -33,9 +33,9 @@ public class SokAnvandare extends Page {
             
 
         try {
-            allaAnvandare = app.getDataBaseConnection().fetchColumn(fraga); // hämta alla användarnamn
+            allaAnvandare = app.getDataBaseConnection().fetchColumn(fraga); // hämta alla användarid
             
-            //En for loop som lägger in användarnas id för vare instans som uppstår.
+            //En for loop som lägger in användarnas namn i en combobox för vare instans som uppstår.
             for (String id : allaAnvandare) {
                 String forNamn = app.getDataBaseConnection().fetchSingle("SELECT fornamn FROM anvandare WHERE anvandar_id = '" + id + "'");
                 String efterNamn = app.getDataBaseConnection().fetchSingle("SELECT efternamn FROM anvandare WHERE anvandar_id = '" + id + "'");
