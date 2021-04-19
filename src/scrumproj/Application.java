@@ -69,16 +69,13 @@ public class Application extends JFrame {
         addPage (new AdminMeny(this));  //1
         addPage(new RegistreraAnvandare(this)); //2
         addPage(new TaBortAnvandare(this)); //3
-         addPage(new AnvandarMeny(this));//4
-         addPage(new SokAnvandare(this));//5
-         addPage(new PubliceraInlagg(this));//6
-         addPage(new InformellBlogg(this));//7
-          addPage(new SkapaKategoriInformell(this));//8
+        addPage(new AnvandarMeny(this));//4
+        addPage(new SokAnvandare(this));//5
+        addPage(new PubliceraInlagg(this));//6
+        addPage(new InformellBlogg(this));//7
+        addPage(new SkapaKategoriInformell(this));//8
         addPage(new FormellBlogg(this));//9
-        
-        
-        
-         
+        addPage(new AnvandareKontoUppgifter(this)); //10 
         
                 setVisible(true);
     }
