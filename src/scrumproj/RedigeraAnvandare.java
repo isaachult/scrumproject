@@ -28,7 +28,7 @@ public class RedigeraAnvandare extends Page {
     
         String fraga = "SELECT anvandar_id FROM anvandare";
         
-
+      
         ArrayList<String> allaAnvandare = null;
             cboxAnvandare.removeAllItems();
             
@@ -42,7 +42,7 @@ public class RedigeraAnvandare extends Page {
                 String efterNamn = app.getDataBaseConnection().fetchSingle("SELECT efternamn FROM anvandare WHERE anvandar_id = '" + id + "'");
                 String anvandarId = app.getDataBaseConnection().fetchSingle("SELECT anvandar_id FROM anvandare WHERE anvandar_id = '" + id + "'");
                 String epost = app.getDataBaseConnection().fetchSingle("SELECT epost FROM anvandare WHERE anvandar_id = '" + id + "'" );
-                cboxAnvandare.addItem(epost + " " + forNamn + " " + efterNamn);
+                cboxAnvandare.addItem(epost + " " + "NAMN: " + forNamn + " " + efterNamn);
             }
             
             
@@ -95,6 +95,7 @@ public class RedigeraAnvandare extends Page {
         txtFieldTelefonnummer = new javax.swing.JTextField();
         txtFieldAdress = new javax.swing.JTextField();
         btnStarta = new javax.swing.JButton();
+        btnTillbaka = new javax.swing.JButton();
 
         cboxAnvandare.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         cboxAnvandare.addActionListener(new java.awt.event.ActionListener() {
@@ -103,7 +104,7 @@ public class RedigeraAnvandare extends Page {
             }
         });
 
-        btnRedigera.setText("Redigera uppgifter");
+        btnRedigera.setText("Bekräfta nya uppgifter");
         btnRedigera.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnRedigeraActionPerformed(evt);
@@ -126,10 +127,23 @@ public class RedigeraAnvandare extends Page {
 
         checkBoxAdmin.setText("Admin");
 
+        txtFieldTelefonnummer.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtFieldTelefonnummerActionPerformed(evt);
+            }
+        });
+
         btnStarta.setText("Hämta uppgifter");
         btnStarta.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnStartaActionPerformed(evt);
+            }
+        });
+
+        btnTillbaka.setText("Tillbaka");
+        btnTillbaka.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnTillbakaActionPerformed(evt);
             }
         });
 
@@ -138,43 +152,46 @@ public class RedigeraAnvandare extends Page {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(19, 19, 19)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(lblValjAnvandare, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(cboxAnvandare, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addComponent(btnStarta))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(19, 19, 19)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(lblValjAnvandare, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(cboxAnvandare, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(btnStarta)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(btnTillbaka)))
                 .addGap(127, 127, 127)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnRedigera)
-                    .addComponent(checkBoxAdmin)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblFornamn)
-                            .addComponent(lblLosenord)
-                            .addComponent(lblEpost))
-                        .addGap(33, 33, 33)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtFieldEpost, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(passwordFieldLosenord, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtFieldFornamn, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(layout.createSequentialGroup()
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(lblFornamn)
+                                .addComponent(lblLosenord)
+                                .addComponent(lblEpost))
+                            .addGap(33, 33, 33)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(txtFieldFornamn)
+                                .addComponent(passwordFieldLosenord)
+                                .addComponent(txtFieldEpost)))
+                        .addGroup(layout.createSequentialGroup()
                             .addComponent(lblEfternamn)
                             .addGap(27, 27, 27)
-                            .addComponent(txtFieldEfternamn, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(layout.createSequentialGroup()
-                                    .addComponent(lblTelefonNummer)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
-                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                    .addComponent(lblAdress)
-                                    .addGap(47, 47, 47)))
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(txtFieldTelefonnummer)
-                                .addComponent(txtFieldAdress)))))
-                .addContainerGap(22, Short.MAX_VALUE))
+                            .addComponent(txtFieldEfternamn))
+                        .addGroup(layout.createSequentialGroup()
+                            .addComponent(lblAdress)
+                            .addGap(45, 45, 45)
+                            .addComponent(txtFieldAdress, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(checkBoxAdmin, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(btnRedigera)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(lblTelefonNummer)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtFieldTelefonnummer, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(98, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -203,14 +220,16 @@ public class RedigeraAnvandare extends Page {
                     .addComponent(lblTelefonNummer)
                     .addComponent(txtFieldTelefonnummer, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblAdress)
                     .addComponent(txtFieldAdress, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addGap(21, 21, 21)
                 .addComponent(checkBoxAdmin)
                 .addGap(18, 18, 18)
-                .addComponent(btnRedigera)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnRedigera)
+                    .addComponent(btnTillbaka))
+                .addContainerGap(20, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -230,6 +249,8 @@ public class RedigeraAnvandare extends Page {
             String nyttEfternamn = txtFieldEfternamn.getText();
             String nyttTelefonnummer = txtFieldTelefonnummer.getText();
             String nyAdress = txtFieldAdress.getText();
+            char[] nyttLosenordArray = passwordFieldLosenord.getPassword();
+            String nyttLosenord = new String(nyttLosenordArray);
             String adminStatus = " ";
             if (checkBoxAdmin.isSelected()) {
                 adminStatus = ("J");
@@ -237,8 +258,17 @@ public class RedigeraAnvandare extends Page {
                 adminStatus = ("N");
             }
 
-            app.getDataBaseConnection().update(("UPDATE anvandare SET fornamn = " + "'" + nyttFornamn + "'" + ", " + "telefonnummer = " + "'" + nyttTelefonnummer + "'" + ", " + "efternamn = " + "'" + nyttEfternamn + "'" + ", " + "adress = " + "'" + nyAdress + "'" + ", " + "adminstatus = " + "'" + adminStatus + "'" + "WHERE anvandar_id = " + "'" + anvandarId + "'"));
+            if ((!Validering.tfIsTomt(txtFieldEpost)) && (!Validering.tfIsTomt(txtFieldFornamn)) && (!Validering.tfIsTomt(txtFieldEfternamn)) && (!Validering.tfIsTomt(txtFieldTelefonnummer)) && (!Validering.tfIsTomt(txtFieldAdress)) && (Validering.passwordHarVarde(passwordFieldLosenord)) )
+            {
+            app.getDataBaseConnection().update(("UPDATE anvandare SET fornamn = " + "'" + nyttFornamn + "'" + ", " + "telefonnummer = " + "'" + nyttTelefonnummer + "'" + ", " + "efternamn = " + "'" + nyttEfternamn + "'" + ", " + "adress = " + "'" + nyAdress + "'" + ", " + "adminstatus = " + "'" + adminStatus + "'" + ", " + "losenord = " + "'" + nyttLosenord + "'" + ", " + "epost = " + "'" + nyEmail + "'" + " WHERE anvandar_id = " + "'" + anvandarId + "'"));
+            JOptionPane.showMessageDialog(null, "Uppdatering av uppgifter lyckades!");
             updateInfo();
+            }
+            else
+            {
+                JOptionPane.showMessageDialog(null, "En eller flera textrutor är tomma, vänligen fyll i alla");
+            }
+            
         }
         
         catch (InfException e)
@@ -251,7 +281,7 @@ public class RedigeraAnvandare extends Page {
     }//GEN-LAST:event_btnRedigeraActionPerformed
 
     private void cboxAnvandareActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboxAnvandareActionPerformed
-        //SetUppgifter();
+        
     }//GEN-LAST:event_cboxAnvandareActionPerformed
 
     private void btnStartaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnStartaActionPerformed
@@ -294,10 +324,19 @@ public class RedigeraAnvandare extends Page {
         
     }//GEN-LAST:event_btnStartaActionPerformed
 
+    private void txtFieldTelefonnummerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtFieldTelefonnummerActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtFieldTelefonnummerActionPerformed
+
+    private void btnTillbakaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTillbakaActionPerformed
+        app.selectPage(app.getPreviousPage());
+    }//GEN-LAST:event_btnTillbakaActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnRedigera;
     private javax.swing.JButton btnStarta;
+    private javax.swing.JButton btnTillbaka;
     private javax.swing.JComboBox<String> cboxAnvandare;
     private javax.swing.JCheckBox checkBoxAdmin;
     private javax.swing.JLabel lblAdress;
