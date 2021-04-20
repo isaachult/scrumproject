@@ -5,6 +5,7 @@
  */
 package scrumproj;
 
+import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import oru.inf.InfException;
 
@@ -19,12 +20,33 @@ public class AnvandarMeny extends Page {
     @Override
     public void updateInfo() { 
         try {
-    int inloggadId = app.getCurrentUser();
-    String namn = app.getDataBaseConnection().fetchSingle("SELECT FORNAMN FROM ANVANDARE WHERE ANVANDAR_ID= '" + inloggadId + "'"); 
-    txtProfile.setText("Välkommen" + " " +namn+ "!");
-    }
-        catch(InfException e) {
+            int inloggadId = app.getCurrentUser();
+            String namn = app.getDataBaseConnection().fetchSingle("SELECT FORNAMN FROM ANVANDARE WHERE ANVANDAR_ID= '" + inloggadId + "'"); 
+            txtProfile.setText("Välkommen" + " " +namn+ "!");
+        
+           
             
+            ArrayList<String> allaNotiser = app.getDataBaseConnection().fetchColumn("SELECT NOTIS_BESKRIVNING FROM NOTISER JOIN SKICKAD_NOTIS ON NOTISER.NOTIS_ID = SKICKAD_NOTIS.NOTIS_ID WHERE ANVANDAR_ID = " + inloggadId);
+            boxNotiser.removeAllItems();
+            boxNotiser.addItem("Välj notis");
+            
+            
+            if(allaNotiser != null) {
+                for (String notiser : allaNotiser) {      
+                    boxNotiser.addItem(notiser);
+                }
+            }
+        } catch(InfException e) {
+            System.err.println(e);
+        }
+    }
+    
+    public void updateNotificationText () {
+        try {
+        String notificationText = boxNotiser.getSelectedItem().toString();
+        txtNotification.setText(notificationText); 
+        } catch (NullPointerException e) {
+            System.out.println("Finns inga notiser att visa");
         }
     }
 
@@ -46,7 +68,8 @@ public class AnvandarMeny extends Page {
         btnKontouppgifter = new javax.swing.JButton();
         boxNotiser = new javax.swing.JComboBox<>();
         lblNotiser = new javax.swing.JLabel();
-        btnSokAnvandare = new javax.swing.JButton();
+        btnDltNotification = new javax.swing.JButton();
+        txtNotification = new javax.swing.JLabel();
 
         setMaximumSize(new java.awt.Dimension(640, 640));
         setMinimumSize(new java.awt.Dimension(640, 640));
@@ -81,12 +104,18 @@ public class AnvandarMeny extends Page {
             }
         });
 
+        boxNotiser.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                boxNotiserActionPerformed(evt);
+            }
+        });
+
         lblNotiser.setText("Notiser");
 
-        btnSokAnvandare.setText("Sök användare");
-        btnSokAnvandare.addActionListener(new java.awt.event.ActionListener() {
+        btnDltNotification.setText("Ta bort notis");
+        btnDltNotification.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnSokAnvandareActionPerformed(evt);
+                btnDltNotificationActionPerformed(evt);
             }
         });
 
@@ -103,20 +132,20 @@ public class AnvandarMeny extends Page {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(41, 41, 41)
-                        .addComponent(lblNotiser))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(22, 22, 22)
-                        .addComponent(boxNotiser, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
                         .addGap(204, 204, 204)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(btnFormellBlogg, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(btnKalender, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(btnInformellBlogg, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btnKontouppgifter, javax.swing.GroupLayout.DEFAULT_SIZE, 203, Short.MAX_VALUE)
-                            .addComponent(btnSokAnvandare, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(btnKontouppgifter, javax.swing.GroupLayout.DEFAULT_SIZE, 203, Short.MAX_VALUE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(22, 22, 22)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblNotiser)
+                            .addComponent(btnDltNotification)
+                            .addComponent(boxNotiser, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtNotification, javax.swing.GroupLayout.PREFERRED_SIZE, 534, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(86, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -133,13 +162,15 @@ public class AnvandarMeny extends Page {
                 .addComponent(btnInformellBlogg)
                 .addGap(18, 18, 18)
                 .addComponent(btnKontouppgifter)
-                .addGap(18, 18, 18)
-                .addComponent(btnSokAnvandare)
-                .addGap(134, 134, 134)
+                .addGap(175, 175, 175)
                 .addComponent(lblNotiser)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(boxNotiser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(207, Short.MAX_VALUE))
+                .addGap(27, 27, 27)
+                .addComponent(txtNotification, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btnDltNotification)
+                .addContainerGap(127, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -160,20 +191,43 @@ public class AnvandarMeny extends Page {
         app.selectPage(10);
     }//GEN-LAST:event_btnKontouppgifterActionPerformed
 
-    private void btnSokAnvandareActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSokAnvandareActionPerformed
-        app.selectPage(5);
-    }//GEN-LAST:event_btnSokAnvandareActionPerformed
+    private void btnDltNotificationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDltNotificationActionPerformed
+        try {
+            
+            String valdNotis = boxNotiser.getSelectedItem().toString();
+            String idToRemove = app.getDataBaseConnection().fetchSingle("SELECT NOTIS_ID FROM NOTISER WHERE NOTIS_BESKRIVNING = '" + valdNotis + "'");
+        
+            if (idToRemove == null) {
+                boxNotiser.removeAllItems();
+                boxNotiser.addItem("Välj notis");
+                
+            }   else {
+                    
+                    app.getDataBaseConnection().delete("DELETE FROM SKICKAD_NOTIS WHERE NOTIS_ID = " + idToRemove);
+                    app.getDataBaseConnection().delete("DELETE FROM NOTISER WHERE NOTIS_ID = " + idToRemove);
+        
+                    updateInfo();
+            }
+        } catch (InfException e) {
+            System.err.println(e);
+        }
+    }//GEN-LAST:event_btnDltNotificationActionPerformed
+
+    private void boxNotiserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boxNotiserActionPerformed
+        updateNotificationText();
+    }//GEN-LAST:event_boxNotiserActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox<String> boxNotiser;
+    private javax.swing.JButton btnDltNotification;
     private javax.swing.JButton btnFormellBlogg;
     private javax.swing.JButton btnInformellBlogg;
     private javax.swing.JButton btnKalender;
     private javax.swing.JButton btnKontouppgifter;
     private javax.swing.JButton btnLogout;
-    private javax.swing.JButton btnSokAnvandare;
     private javax.swing.JLabel lblNotiser;
+    private javax.swing.JLabel txtNotification;
     private javax.swing.JLabel txtProfile;
     // End of variables declaration//GEN-END:variables
 }
