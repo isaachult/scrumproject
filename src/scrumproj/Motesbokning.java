@@ -1,6 +1,11 @@
 package scrumproj;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.HashMap;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import oru.inf.InfException;
 
 
 
@@ -22,6 +27,42 @@ public class Motesbokning extends Page {
         SimpleDateFormat datum = new SimpleDateFormat("yyyy-MM-dd");
         
     }
+    @Override
+    public void updateInfo() { 
+    
+        String fraga = "SELECT anvandar_id FROM anvandare";
+        
+      
+        ArrayList<String> allaAnvandare = null;
+            cboxAnvandare.removeAllItems();
+            
+
+        try {
+            allaAnvandare = app.getDataBaseConnection().fetchColumn(fraga); // hämta alla användarnamn
+            
+           //En for loop som lägger in användarnas namn i en combobox för vare instans som uppstår.
+            for (String id : allaAnvandare) {
+                String forNamn = app.getDataBaseConnection().fetchSingle("SELECT fornamn FROM anvandare WHERE anvandar_id = '" + id + "'");
+                String efterNamn = app.getDataBaseConnection().fetchSingle("SELECT efternamn FROM anvandare WHERE anvandar_id = '" + id + "'");
+                String anvandarId = app.getDataBaseConnection().fetchSingle("SELECT anvandar_id FROM anvandare WHERE anvandar_id = '" + id + "'");
+                String epost = app.getDataBaseConnection().fetchSingle("SELECT epost FROM anvandare WHERE anvandar_id = '" + id + "'" );
+                cboxAnvandare.addItem(epost + " " + "NAMN: " + forNamn + " " + efterNamn);
+            }
+            
+            
+           
+
+        } catch (InfException e) {
+            JOptionPane.showMessageDialog(null, e);
+        } catch (Exception ettUndantag) {
+            JOptionPane.showMessageDialog(null, "Ett fel uppstod!");
+            System.out.println("Internt felmeddelande" + ettUndantag.getMessage());
+        }
+    
+        
+        
+    }
+    
 
   
     @SuppressWarnings("unchecked")
@@ -29,24 +70,22 @@ public class Motesbokning extends Page {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        txtBesk = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
         jButton2 = new javax.swing.JButton();
-        date_tf = new javax.swing.JTextField();
-        time_df = new javax.swing.JTextField();
+        txtDatum = new javax.swing.JTextField();
+        txtTid = new javax.swing.JTextField();
+        cboxAnvandare = new javax.swing.JComboBox<>();
 
         jLabel1.setText("Boka Möten");
 
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+        txtBesk.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
+                txtBeskActionPerformed(evt);
             }
         });
 
@@ -58,34 +97,30 @@ public class Motesbokning extends Page {
 
         jLabel4.setText("Tid");
 
-        jTextField2.setText("E-mail");
-        jTextField2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField2ActionPerformed(evt);
-            }
-        });
-
-        jLabel5.setText("Inbjudningar");
-
-        jTextArea1.setColumns(20);
-        jTextArea1.setRows(5);
-        jScrollPane1.setViewportView(jTextArea1);
+        jLabel5.setText("Lägg till en användare här");
 
         jButton2.setText("Boka");
-
-        date_tf.setText("yyyy-MM-dd");
-        date_tf.addActionListener(new java.awt.event.ActionListener() {
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                date_tfActionPerformed(evt);
+                jButton2ActionPerformed(evt);
             }
         });
 
-        time_df.setText("00:00");
-        time_df.addActionListener(new java.awt.event.ActionListener() {
+        txtDatum.setText("yyyy-MM-dd");
+        txtDatum.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                time_dfActionPerformed(evt);
+                txtDatumActionPerformed(evt);
             }
         });
+
+        txtTid.setText("00:00");
+        txtTid.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtTidActionPerformed(evt);
+            }
+        });
+
+        cboxAnvandare.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -97,37 +132,29 @@ public class Motesbokning extends Page {
                         .addGap(168, 168, 168)
                         .addComponent(jLabel1))
                     .addGroup(layout.createSequentialGroup()
+                        .addGap(80, 80, 80)
+                        .addComponent(jLabel4))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(68, 68, 68)
+                        .addComponent(jLabel3))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(20, 20, 20)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(80, 80, 80)
-                                .addComponent(jLabel4))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(68, 68, 68)
-                                .addComponent(jLabel3))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(20, 20, 20)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                        .addComponent(jLabel2)
+                                        .addGap(10, 10, 10))
+                                    .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(txtBesk)
+                                    .addComponent(txtDatum, javax.swing.GroupLayout.DEFAULT_SIZE, 131, Short.MAX_VALUE)
+                                    .addComponent(txtTid, javax.swing.GroupLayout.Alignment.TRAILING))
+                                .addGap(105, 105, 105)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                            .addComponent(jLabel2)
-                                            .addGap(10, 10, 10))
-                                        .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(jTextField1)
-                                        .addComponent(date_tf, javax.swing.GroupLayout.DEFAULT_SIZE, 131, Short.MAX_VALUE)
-                                        .addComponent(time_df, javax.swing.GroupLayout.Alignment.TRAILING)))))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 8, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(layout.createSequentialGroup()
-                                    .addGap(69, 69, 69)
-                                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(jLabel5)
-                                    .addGap(44, 44, 44)))
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap())
+                                    .addComponent(cboxAnvandare, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel5))))))
+                .addContainerGap(154, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -142,44 +169,65 @@ public class Motesbokning extends Page {
                     .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtBesk, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cboxAnvandare, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel3)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(date_tf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jLabel4)
-                        .addGap(1, 1, 1)
-                        .addComponent(time_df, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 35, Short.MAX_VALUE)
-                        .addComponent(jButton2)))
-                .addContainerGap(25, Short.MAX_VALUE))
+                .addComponent(jLabel3)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(txtDatum, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabel4)
+                .addGap(3, 3, 3)
+                .addComponent(txtTid, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 73, Short.MAX_VALUE)
+                .addComponent(jButton2)
+                .addContainerGap(77, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+    private void txtBeskActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtBeskActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField1ActionPerformed
+    }//GEN-LAST:event_txtBeskActionPerformed
 
-    private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
+    private void txtDatumActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtDatumActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField2ActionPerformed
+    }//GEN-LAST:event_txtDatumActionPerformed
 
-    private void date_tfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_date_tfActionPerformed
+    private void txtTidActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTidActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_date_tfActionPerformed
+    }//GEN-LAST:event_txtTidActionPerformed
 
-    private void time_dfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_time_dfActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_time_dfActionPerformed
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        try{
+        String beskrivning = txtBesk.getText();
+        String datum = txtDatum.getText();
+        String tid = txtTid.getText();
+         String valtNamn = cboxAnvandare.getSelectedItem().toString();
+            if (valtNamn.contains(" ")) {
+                valtNamn = valtNamn.substring(0, valtNamn.indexOf(" "));
+            }
+              String motesId = app.getDataBaseConnection().getAutoIncrement("MOTEN", "MOTES_ID");
+    if (motesId == null) {
+        motesId = "1";
+    }
+            
+            
+        String anvandarId = app.getDataBaseConnection().fetchSingle("Select anvandar_id from anvandare where epost ='" + valtNamn + "'");
+         app.getDataBaseConnection().fetchSingle("INSERT INTO MOTEN (BESKRIVNING, MOTES_ID, DATUM, TID) VALUES ('"+beskrivning+"', '"+motesId+"', '"+datum+"','"+tid+"')");
+         app.getDataBaseConnection().fetchSingle("INSERT INTO BOKADE_MOTEN (MOTES_ID, ANVANDAR_ID) VALUES ('"+motesId+"','"+anvandarId+"')");
+         JOptionPane.showMessageDialog(null, "Det nya mötet har skapats!");
+
+      
+        }
+        
+        catch(InfException e) {
+            
+        }
+    }//GEN-LAST:event_jButton2ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTextField date_tf;
+    private javax.swing.JComboBox<String> cboxAnvandare;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
@@ -187,15 +235,9 @@ public class Motesbokning extends Page {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextArea jTextArea1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField time_df;
+    private javax.swing.JTextField txtBesk;
+    private javax.swing.JTextField txtDatum;
+    private javax.swing.JTextField txtTid;
     // End of variables declaration//GEN-END:variables
 
-    @Override
-    public void updateInfo() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
 }
