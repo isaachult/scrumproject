@@ -105,7 +105,12 @@ public class FormellBlogg extends Page {
             }
         });
 
-        jButton2.setText("Gå tillbaka");
+        jButton2.setText("Tillbaka");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         jButton3.setText("Profil");
 
@@ -198,6 +203,10 @@ public class FormellBlogg extends Page {
             System.err.println(e);
         }
     }//GEN-LAST:event_btnPubliceraActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton2ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
