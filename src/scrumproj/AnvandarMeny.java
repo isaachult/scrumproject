@@ -44,6 +44,8 @@ public class AnvandarMeny extends Page {
         btnLogout = new javax.swing.JButton();
         btnKalender = new javax.swing.JButton();
         btnKontouppgifter = new javax.swing.JButton();
+        boxNotiser = new javax.swing.JComboBox<>();
+        lblNotiser = new javax.swing.JLabel();
 
         setMaximumSize(new java.awt.Dimension(640, 640));
         setMinimumSize(new java.awt.Dimension(640, 640));
@@ -78,6 +80,8 @@ public class AnvandarMeny extends Page {
             }
         });
 
+        lblNotiser.setText("Notiser");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -89,12 +93,20 @@ public class AnvandarMeny extends Page {
                 .addComponent(btnLogout)
                 .addGap(68, 68, 68))
             .addGroup(layout.createSequentialGroup()
-                .addGap(204, 204, 204)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(btnFormellBlogg, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnKalender, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnInformellBlogg, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnKontouppgifter, javax.swing.GroupLayout.DEFAULT_SIZE, 203, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(204, 204, 204)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(btnFormellBlogg, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnKalender, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnInformellBlogg, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnKontouppgifter, javax.swing.GroupLayout.DEFAULT_SIZE, 203, Short.MAX_VALUE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(41, 41, 41)
+                        .addComponent(lblNotiser))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(22, 22, 22)
+                        .addComponent(boxNotiser, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -112,7 +124,11 @@ public class AnvandarMeny extends Page {
                 .addComponent(btnInformellBlogg)
                 .addGap(18, 18, 18)
                 .addComponent(btnKontouppgifter)
-                .addContainerGap(424, Short.MAX_VALUE))
+                .addGap(175, 175, 175)
+                .addComponent(lblNotiser)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(boxNotiser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(207, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -135,11 +151,13 @@ public class AnvandarMeny extends Page {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JComboBox<String> boxNotiser;
     private javax.swing.JButton btnFormellBlogg;
     private javax.swing.JButton btnInformellBlogg;
     private javax.swing.JButton btnKalender;
     private javax.swing.JButton btnKontouppgifter;
     private javax.swing.JButton btnLogout;
+    private javax.swing.JLabel lblNotiser;
     private javax.swing.JLabel txtProfile;
     // End of variables declaration//GEN-END:variables
 }
