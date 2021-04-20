@@ -179,7 +179,28 @@ public class RedigeraMote extends Page {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    try {
+         String valtMote = ValjMote.getSelectedItem().toString();
+        String motesId = app.getDataBaseConnection().fetchSingle("Select MOTES_ID from MOTEN where BESKRIVNING ='" + valtMote + "'");
         
+        String nyBeskrivning = txtBeskrivning.getText();
+        String nyttDatum = txtDatum.getText();
+        String nyTid = txtTid.getText();
+          if ((!Validering.tfIsTomt(txtBeskrivning)) && (!Validering.tfIsTomt(txtDatum)) && (!Validering.tfIsTomt(txtTid)))
+            {
+            app.getDataBaseConnection().update(("UPDATE MOTEN SET BESKRIVNING = " + "'" + nyBeskrivning + "'" + ", " + "DATUM = " + "'" + nyttDatum + "'" + ", " + "TID = " + "'" + nyTid + "'" + " WHERE MOTES_ID = " + "'" + motesId + "'"));
+            JOptionPane.showMessageDialog(null, "Uppdatering av uppgifter lyckades!");
+            updateInfo();
+            }
+            else
+            {
+                JOptionPane.showMessageDialog(null, "En eller flera textrutor är tomma, vänligen fyll i alla");
+            }
+    }      
+    catch(InfException e)
+    {
+        
+    }
     }//GEN-LAST:event_jButton2ActionPerformed
 
 
