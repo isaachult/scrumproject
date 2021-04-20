@@ -76,6 +76,7 @@ public class Application extends JFrame {
         addPage(new SkapaKategoriInformell(this));//8
         addPage(new FormellBlogg(this));//9
         addPage(new AnvandareKontoUppgifter(this)); //10 
+        addPage(new RedigeraAnvandare(this)); // 11
         
                 setVisible(true);
     }
