@@ -168,7 +168,7 @@ public class Inloggning extends Page {
                 textEpost.setText("");
                 textLosenord.setText("");
                 Besokare.setSelectedIndex(0);
-    app.selectPage(5);
+    //app.selectPage(5);
         
     }//GEN-LAST:event_LoggaInActionPerformed
 
