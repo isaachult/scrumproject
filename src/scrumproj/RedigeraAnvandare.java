@@ -25,7 +25,8 @@ public class RedigeraAnvandare extends Page {
     
     @Override
     public void updateInfo() { 
-    
+        
+        lblUppdatera.setVisible(false);
         String fraga = "SELECT anvandar_id FROM anvandare";
         
       
@@ -96,6 +97,7 @@ public class RedigeraAnvandare extends Page {
         txtFieldAdress = new javax.swing.JTextField();
         btnStarta = new javax.swing.JButton();
         btnTillbaka = new javax.swing.JButton();
+        lblUppdatera = new javax.swing.JLabel();
 
         cboxAnvandare.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         cboxAnvandare.addActionListener(new java.awt.event.ActionListener() {
@@ -147,6 +149,8 @@ public class RedigeraAnvandare extends Page {
             }
         });
 
+        lblUppdatera.setText("jLabel1");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -156,26 +160,16 @@ public class RedigeraAnvandare extends Page {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(19, 19, 19)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(btnStarta)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                 .addComponent(lblValjAnvandare, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(cboxAnvandare, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addComponent(btnStarta)))
+                                .addComponent(cboxAnvandare, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(btnTillbaka)))
-                .addGap(127, 127, 127)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 127, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addGroup(layout.createSequentialGroup()
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(lblFornamn)
-                                .addComponent(lblLosenord)
-                                .addComponent(lblEpost))
-                            .addGap(33, 33, 33)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(txtFieldFornamn)
-                                .addComponent(passwordFieldLosenord)
-                                .addComponent(txtFieldEpost)))
                         .addGroup(layout.createSequentialGroup()
                             .addComponent(lblEfternamn)
                             .addGap(27, 27, 27)
@@ -186,17 +180,33 @@ public class RedigeraAnvandare extends Page {
                             .addComponent(txtFieldAdress, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(checkBoxAdmin, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(btnRedigera)))
+                            .addComponent(btnRedigera))
+                        .addGroup(layout.createSequentialGroup()
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(lblFornamn)
+                                .addComponent(lblLosenord)
+                                .addComponent(lblEpost))
+                            .addGap(33, 33, 33)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(txtFieldFornamn)
+                                .addComponent(passwordFieldLosenord)
+                                .addComponent(txtFieldEpost))))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(lblTelefonNummer)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(txtFieldTelefonnummer, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(98, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(175, 175, 175)
+                .addComponent(lblUppdatera)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(31, 31, 31)
+                .addContainerGap()
+                .addComponent(lblUppdatera)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblValjAnvandare)
                     .addComponent(lblEpost)
@@ -266,7 +276,9 @@ public class RedigeraAnvandare extends Page {
             }
             else
             {
-                JOptionPane.showMessageDialog(null, "En eller flera textrutor är tomma, vänligen fyll i alla");
+                //JOptionPane.showMessageDialog(null, "En eller flera textrutor är tomma, vänligen fyll i alla");
+                lblUppdatera.setVisible(true);
+                lblUppdatera.setText("En eller flera textrutor är tomma, vänligen fyll i alla");
             }
             
         }
@@ -345,6 +357,7 @@ public class RedigeraAnvandare extends Page {
     private javax.swing.JLabel lblFornamn;
     private javax.swing.JLabel lblLosenord;
     private javax.swing.JLabel lblTelefonNummer;
+    private javax.swing.JLabel lblUppdatera;
     private javax.swing.JLabel lblValjAnvandare;
     private javax.swing.JPasswordField passwordFieldLosenord;
     private javax.swing.JTextField txtFieldAdress;

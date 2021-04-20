@@ -21,11 +21,11 @@
                   <Group type="102" attributes="0">
                       <EmptySpace min="-2" pref="19" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                          <Component id="btnStarta" min="-2" max="-2" attributes="0"/>
+                          <Group type="103" alignment="0" groupAlignment="0" max="-2" attributes="0">
                               <Component id="lblValjAnvandare" max="32767" attributes="0"/>
                               <Component id="cboxAnvandare" max="32767" attributes="0"/>
                           </Group>
-                          <Component id="btnStarta" min="-2" max="-2" attributes="0"/>
                       </Group>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
@@ -33,22 +33,9 @@
                       <Component id="btnTillbaka" min="-2" max="-2" attributes="0"/>
                   </Group>
               </Group>
-              <EmptySpace min="-2" pref="127" max="-2" attributes="0"/>
+              <EmptySpace pref="127" max="32767" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                      <Group type="102" alignment="0" attributes="0">
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="lblFornamn" alignment="0" min="-2" max="-2" attributes="0"/>
-                              <Component id="lblLosenord" alignment="0" min="-2" max="-2" attributes="0"/>
-                              <Component id="lblEpost" alignment="0" min="-2" max="-2" attributes="0"/>
-                          </Group>
-                          <EmptySpace min="-2" pref="33" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="txtFieldFornamn" alignment="0" max="32767" attributes="0"/>
-                              <Component id="passwordFieldLosenord" alignment="0" max="32767" attributes="0"/>
-                              <Component id="txtFieldEpost" alignment="0" max="32767" attributes="0"/>
-                          </Group>
-                      </Group>
                       <Group type="102" alignment="0" attributes="0">
                           <Component id="lblEfternamn" min="-2" max="-2" attributes="0"/>
                           <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
@@ -63,6 +50,19 @@
                           <Component id="checkBoxAdmin" alignment="0" min="-2" max="-2" attributes="0"/>
                           <Component id="btnRedigera" min="-2" max="-2" attributes="0"/>
                       </Group>
+                      <Group type="102" alignment="0" attributes="0">
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Component id="lblFornamn" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Component id="lblLosenord" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Component id="lblEpost" alignment="0" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace min="-2" pref="33" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Component id="txtFieldFornamn" alignment="0" max="32767" attributes="0"/>
+                              <Component id="passwordFieldLosenord" alignment="0" max="32767" attributes="0"/>
+                              <Component id="txtFieldEpost" alignment="0" max="32767" attributes="0"/>
+                          </Group>
+                      </Group>
                   </Group>
                   <Group type="102" attributes="0">
                       <Component id="lblTelefonNummer" min="-2" max="-2" attributes="0"/>
@@ -72,12 +72,19 @@
               </Group>
               <EmptySpace pref="98" max="32767" attributes="0"/>
           </Group>
+          <Group type="102" alignment="0" attributes="0">
+              <EmptySpace min="-2" pref="175" max="-2" attributes="0"/>
+              <Component id="lblUppdatera" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="32767" attributes="0"/>
+          </Group>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
-              <EmptySpace min="-2" pref="31" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="lblUppdatera" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="lblValjAnvandare" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="lblEpost" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -219,6 +226,11 @@
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnTillbakaActionPerformed"/>
       </Events>
+    </Component>
+    <Component class="javax.swing.JLabel" name="lblUppdatera">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="jLabel1"/>
+      </Properties>
     </Component>
   </SubComponents>
 </Form>
