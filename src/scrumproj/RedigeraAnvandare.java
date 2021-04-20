@@ -33,6 +33,13 @@ public class RedigeraAnvandare extends Page {
         ArrayList<String> allaAnvandare = null;
             cboxAnvandare.removeAllItems();
             
+        txtFieldEpost.setText("");
+        txtFieldTelefonnummer.setText("");
+        passwordFieldLosenord.setText("");
+        txtFieldFornamn.setText("");
+        txtFieldEfternamn.setText("");
+        txtFieldTelefonnummer.setText("");
+        txtFieldAdress.setText("");
 
         try {
             allaAnvandare = app.getDataBaseConnection().fetchColumn(fraga); // hämta alla användarnamn
@@ -245,6 +252,9 @@ public class RedigeraAnvandare extends Page {
 
     private void btnRedigeraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRedigeraActionPerformed
         
+       
+        
+        
         
         try {
             String valtNamn = cboxAnvandare.getSelectedItem().toString();
@@ -270,8 +280,13 @@ public class RedigeraAnvandare extends Page {
 
             if ((!Validering.tfIsTomt(txtFieldEpost)) && (!Validering.tfIsTomt(txtFieldFornamn)) && (!Validering.tfIsTomt(txtFieldEfternamn)) && (!Validering.tfIsTomt(txtFieldTelefonnummer)) && (!Validering.tfIsTomt(txtFieldAdress)) && (Validering.passwordHarVarde(passwordFieldLosenord)) )
             {
-            app.getDataBaseConnection().update(("UPDATE anvandare SET fornamn = " + "'" + nyttFornamn + "'" + ", " + "telefonnummer = " + "'" + nyttTelefonnummer + "'" + ", " + "efternamn = " + "'" + nyttEfternamn + "'" + ", " + "adress = " + "'" + nyAdress + "'" + ", " + "adminstatus = " + "'" + adminStatus + "'" + ", " + "losenord = " + "'" + nyttLosenord + "'" + ", " + "epost = " + "'" + nyEmail + "'" + " WHERE anvandar_id = " + "'" + anvandarId + "'"));
-            JOptionPane.showMessageDialog(null, "Uppdatering av uppgifter lyckades!");
+                int dialogButton = JOptionPane.YES_NO_OPTION;
+                int dialogResult = JOptionPane.showConfirmDialog(this, "Är du säker på att du vill ändra uppgifterna?", "Bekräfta ändringar", dialogButton);
+                if (dialogResult == 0) {
+                    app.getDataBaseConnection().update(("UPDATE anvandare SET fornamn = " + "'" + nyttFornamn + "'" + ", " + "telefonnummer = " + "'" + nyttTelefonnummer + "'" + ", " + "efternamn = " + "'" + nyttEfternamn + "'" + ", " + "adress = " + "'" + nyAdress + "'" + ", " + "adminstatus = " + "'" + adminStatus + "'" + ", " + "losenord = " + "'" + nyttLosenord + "'" + ", " + "epost = " + "'" + nyEmail + "'" + " WHERE anvandar_id = " + "'" + anvandarId + "'"));
+                    JOptionPane.showMessageDialog(null, "Uppdatering av uppgifter lyckades!");
+                }
+            
             updateInfo();
             }
             else
@@ -288,6 +303,9 @@ public class RedigeraAnvandare extends Page {
             JOptionPane.showMessageDialog(null, "Något blev fel, försök igen!");
             System.err.println(e);
         }
+        
+        
+       
         
         
     }//GEN-LAST:event_btnRedigeraActionPerformed

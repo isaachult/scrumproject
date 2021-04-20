@@ -46,6 +46,7 @@ public class AnvandarMeny extends Page {
         btnKontouppgifter = new javax.swing.JButton();
         boxNotiser = new javax.swing.JComboBox<>();
         lblNotiser = new javax.swing.JLabel();
+        btnSokAnvandare = new javax.swing.JButton();
 
         setMaximumSize(new java.awt.Dimension(640, 640));
         setMinimumSize(new java.awt.Dimension(640, 640));
@@ -82,6 +83,13 @@ public class AnvandarMeny extends Page {
 
         lblNotiser.setText("Notiser");
 
+        btnSokAnvandare.setText("Sök användare");
+        btnSokAnvandare.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSokAnvandareActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -95,18 +103,19 @@ public class AnvandarMeny extends Page {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
+                        .addGap(41, 41, 41)
+                        .addComponent(lblNotiser))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(22, 22, 22)
+                        .addComponent(boxNotiser, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
                         .addGap(204, 204, 204)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(btnFormellBlogg, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(btnKalender, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(btnInformellBlogg, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btnKontouppgifter, javax.swing.GroupLayout.DEFAULT_SIZE, 203, Short.MAX_VALUE)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(41, 41, 41)
-                        .addComponent(lblNotiser))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(22, 22, 22)
-                        .addComponent(boxNotiser, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(btnKontouppgifter, javax.swing.GroupLayout.DEFAULT_SIZE, 203, Short.MAX_VALUE)
+                            .addComponent(btnSokAnvandare, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -124,7 +133,9 @@ public class AnvandarMeny extends Page {
                 .addComponent(btnInformellBlogg)
                 .addGap(18, 18, 18)
                 .addComponent(btnKontouppgifter)
-                .addGap(175, 175, 175)
+                .addGap(18, 18, 18)
+                .addComponent(btnSokAnvandare)
+                .addGap(134, 134, 134)
                 .addComponent(lblNotiser)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(boxNotiser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -149,6 +160,10 @@ public class AnvandarMeny extends Page {
         app.selectPage(10);
     }//GEN-LAST:event_btnKontouppgifterActionPerformed
 
+    private void btnSokAnvandareActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSokAnvandareActionPerformed
+        app.selectPage(5);
+    }//GEN-LAST:event_btnSokAnvandareActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox<String> boxNotiser;
@@ -157,6 +172,7 @@ public class AnvandarMeny extends Page {
     private javax.swing.JButton btnKalender;
     private javax.swing.JButton btnKontouppgifter;
     private javax.swing.JButton btnLogout;
+    private javax.swing.JButton btnSokAnvandare;
     private javax.swing.JLabel lblNotiser;
     private javax.swing.JLabel txtProfile;
     // End of variables declaration//GEN-END:variables

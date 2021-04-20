@@ -64,7 +64,7 @@ public class AdminMeny extends Page {
 
         jLabel1.setText("jLabel2");
 
-        jButton4.setText("Sök på användare");
+        jButton4.setText("Sök användare");
         jButton4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton4ActionPerformed(evt);
