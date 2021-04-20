@@ -22,7 +22,7 @@ public class Validering {
         boolean resultat = true;
 
         if (rutaAttKolla.getText().isEmpty()) {
-            JOptionPane.showMessageDialog(null, "En eller flera textrutor är tomma!");
+            
             rutaAttKolla.requestFocus();
             resultat = false;
         }
@@ -35,7 +35,7 @@ public class Validering {
         boolean resultat = true;
 
         if (rutaAttKolla.getText().isEmpty()) {
-            JOptionPane.showMessageDialog(null, "En eller flera textrutor är tomma!");
+            
             rutaAttKolla.requestFocus();
             resultat = false;
         }
@@ -65,7 +65,7 @@ public class Validering {
             rutaAttKolla.requestFocus();
 
         } catch (NumberFormatException e) {
-            JOptionPane.showMessageDialog(null, "Var god ange ett heltal!");
+            
             resultat = false;
         }
 
@@ -82,7 +82,7 @@ public class Validering {
             rutaAttKolla.requestFocus();
 
         } catch (NumberFormatException e) {
-            JOptionPane.showMessageDialog(null, "Var god ange giltigt ID!");
+            
             resultat = false;
         }
 
@@ -96,7 +96,7 @@ public class Validering {
         String inStrang = new String(losenordAttKolla.getPassword());
 
         if (inStrang.isEmpty()) {
-            JOptionPane.showMessageDialog(null, "Lösenordsrutan är tom!");
+            
             losenordAttKolla.requestFocus();
             resultat = false;
         }
