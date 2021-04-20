@@ -77,6 +77,10 @@ public class Application extends JFrame {
         addPage(new FormellBlogg(this));//9
         addPage(new AnvandareKontoUppgifter(this)); //10 
         addPage(new RedigeraAnvandare(this)); // 11
+        addPage(new Motesbokning(this)); // 12
+        addPage(new Moten (this)); // 13
+        addPage(new TaBortMote (this)); // 14
+        addPage(new RedigeraMote (this)); // 15
         
                 setVisible(true);
     }
