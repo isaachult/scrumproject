@@ -31,9 +31,10 @@ public class FormellBlogg extends Page {
                 String anvandare = rad.get("ANVANDARE");
                 String inlagg = rad.get("INLAGG");
                 String datum = rad.get("DATUM");
+                
 
                 //Sätter in anvandare + inlagg + datum  i tabellen mha addRow()
-                table.addRow(new Object[]{anvandare, inlagg, datum});
+                table.addRow(new Object[]{anvandare, inlagg, datum,});
             }
 
             //Säger att tblInlagg ska använda sig av den modellen vi skapade ovan

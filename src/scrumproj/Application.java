@@ -81,6 +81,7 @@ public class Application extends JFrame {
         addPage(new Moten (this)); // 13
         addPage(new TaBortMote (this)); // 14
         addPage(new RedigeraMote (this)); // 15
+        addPage(new BokadeMoten (this)); // 16
         
                 setVisible(true);
     }
