@@ -38,7 +38,7 @@ public class AnvandareKontoUppgifter extends Page {
             txtPhone.setText(currentPhone);
                 
         } catch (InfException e) {
-            System.err.println(e);
+            System.err.println(e.getMessage());
         }
     }
     
@@ -264,7 +264,7 @@ public class AnvandareKontoUppgifter extends Page {
                 
         } catch (InfException e) {
             JOptionPane.showMessageDialog(null, "Något gick fel, försök igen");
-            System.err.println(e);
+            System.err.println(e.getMessage());
             
         }
     }//GEN-LAST:event_btnConfirmPassWordActionPerformed
@@ -301,7 +301,7 @@ public class AnvandareKontoUppgifter extends Page {
            
            lblConfirmChange.setText("Nya uppgifter har registrerats!");
        } catch (InfException e) {
-           System.err.println(e);
+           System.err.println(e.getMessage());
            JOptionPane.showMessageDialog(null , "Något gick fel, försök igen");
        }
     }//GEN-LAST:event_btnConfirmUserInformationActionPerformed

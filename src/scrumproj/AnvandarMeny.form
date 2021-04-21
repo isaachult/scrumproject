@@ -33,15 +33,6 @@
           </Group>
           <Group type="102" attributes="0">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" attributes="0">
-                      <EmptySpace min="-2" pref="204" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                          <Component id="btnFormellBlogg" alignment="0" max="32767" attributes="0"/>
-                          <Component id="btnKalender" max="32767" attributes="0"/>
-                          <Component id="btnInformellBlogg" alignment="0" max="32767" attributes="0"/>
-                          <Component id="btnKontouppgifter" pref="203" max="32767" attributes="0"/>
-                      </Group>
-                  </Group>
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="-2" pref="22" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
@@ -49,6 +40,16 @@
                           <Component id="btnDltNotification" alignment="0" min="-2" max="-2" attributes="0"/>
                           <Component id="boxNotiser" alignment="0" min="-2" pref="151" max="-2" attributes="0"/>
                           <Component id="txtNotification" alignment="0" min="-2" pref="534" max="-2" attributes="0"/>
+                      </Group>
+                  </Group>
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace min="-2" pref="204" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                          <Component id="btnFormellBlogg" alignment="0" max="32767" attributes="0"/>
+                          <Component id="btnKalender" max="32767" attributes="0"/>
+                          <Component id="btnInformellBlogg" alignment="0" max="32767" attributes="0"/>
+                          <Component id="btnKontouppgifter" pref="203" max="32767" attributes="0"/>
+                          <Component id="btnSubscriptions" max="32767" attributes="0"/>
                       </Group>
                   </Group>
               </Group>
@@ -71,8 +72,10 @@
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Component id="btnInformellBlogg" min="-2" max="-2" attributes="0"/>
               <EmptySpace type="separate" max="-2" attributes="0"/>
+              <Component id="btnSubscriptions" min="-2" max="-2" attributes="0"/>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
               <Component id="btnKontouppgifter" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="175" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="135" max="-2" attributes="0"/>
               <Component id="lblNotiser" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="boxNotiser" min="-2" max="-2" attributes="0"/>
@@ -80,7 +83,7 @@
               <Component id="txtNotification" min="-2" pref="27" max="-2" attributes="0"/>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Component id="btnDltNotification" min="-2" max="-2" attributes="0"/>
-              <EmptySpace pref="95" max="32767" attributes="0"/>
+              <EmptySpace pref="127" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -152,6 +155,14 @@
       </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="txtNotification">
+    </Component>
+    <Component class="javax.swing.JButton" name="btnSubscriptions">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Prenumerationer"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnSubscriptionsActionPerformed"/>
+      </Events>
     </Component>
   </SubComponents>
 </Form>
