@@ -39,7 +39,8 @@ public class SokAnvandare extends Page {
             for (String id : allaAnvandare) {
                 String forNamn = app.getDataBaseConnection().fetchSingle("SELECT fornamn FROM anvandare WHERE anvandar_id = '" + id + "'");
                 String efterNamn = app.getDataBaseConnection().fetchSingle("SELECT efternamn FROM anvandare WHERE anvandar_id = '" + id + "'");
-                cboxAnvandare.addItem(forNamn + " " + efterNamn);
+                String epost = app.getDataBaseConnection().fetchSingle("SELECT epost FROM anvandare WHERE anvandar_id = '" + id + "'");
+                cboxAnvandare.addItem(epost + " " + forNamn + " " + efterNamn);
             }
            
 
@@ -66,6 +67,7 @@ public class SokAnvandare extends Page {
         btnSok = new javax.swing.JButton();
         lblValjAnvandare = new javax.swing.JLabel();
         btnFormell = new javax.swing.JButton();
+        btnTillbaka = new javax.swing.JButton();
 
         cboxAnvandare.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
@@ -85,6 +87,13 @@ public class SokAnvandare extends Page {
             }
         });
 
+        btnTillbaka.setText("Tillbaka");
+        btnTillbaka.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnTillbakaActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -100,6 +109,10 @@ public class SokAnvandare extends Page {
                         .addComponent(cboxAnvandare, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btnSok, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addContainerGap())
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(btnTillbaka)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -115,22 +128,27 @@ public class SokAnvandare extends Page {
                 .addComponent(cboxAnvandare, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(35, 35, 35)
                 .addComponent(btnSok)
-                .addContainerGap(170, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 117, Short.MAX_VALUE)
+                .addComponent(btnTillbaka)
+                .addGap(30, 30, 30))
         );
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnSokActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSokActionPerformed
         // TODO add your handling code here:
         String valtNamn = cboxAnvandare.getSelectedItem().toString();
+        String valdAnvandare = cboxAnvandare.getSelectedItem().toString();
+            if (valdAnvandare.contains(" ")) {
+                valdAnvandare = valdAnvandare.substring(0, valdAnvandare.indexOf(" "));
+            }
         JOptionPane.showMessageDialog(null, "PLACEHOLDER: " + valtNamn + "s profil");
         
     }//GEN-LAST:event_btnSokActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-        
-        app.selectPage(7);
-    }//GEN-LAST:event_jButton1ActionPerformed
+    private void btnTillbakaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTillbakaActionPerformed
+
+        app.selectPage(app.getPreviousPage());
+    }//GEN-LAST:event_btnTillbakaActionPerformed
 
     private void btnFormellActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFormellActionPerformed
 app.selectPage(9);        // TODO add your handling code here:
@@ -140,6 +158,7 @@ app.selectPage(9);        // TODO add your handling code here:
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnFormell;
     private javax.swing.JButton btnSok;
+    private javax.swing.JButton btnTillbaka;
     private javax.swing.JComboBox<String> cboxAnvandare;
     private javax.swing.JLabel lblValjAnvandare;
     // End of variables declaration//GEN-END:variables
