@@ -82,6 +82,7 @@ public class Application extends JFrame {
         addPage(new TaBortMote (this)); // 14
         addPage(new RedigeraMote (this)); // 15
         
+        
                 setVisible(true);
     }
     
