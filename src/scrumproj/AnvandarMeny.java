@@ -37,7 +37,7 @@ public class AnvandarMeny extends Page {
                 }
             }
         } catch(InfException e) {
-            System.err.println(e);
+            System.err.println(e.getMessage());
         }
     }
     
@@ -47,6 +47,7 @@ public class AnvandarMeny extends Page {
         txtNotification.setText(notificationText); 
         } catch (NullPointerException e) {
             System.out.println("Finns inga notiser att visa");
+            System.err.println(e.getMessage());
         }
     }
 
@@ -70,6 +71,7 @@ public class AnvandarMeny extends Page {
         lblNotiser = new javax.swing.JLabel();
         btnDltNotification = new javax.swing.JButton();
         txtNotification = new javax.swing.JLabel();
+        btnSubscriptions = new javax.swing.JButton();
 
         setMaximumSize(new java.awt.Dimension(640, 640));
         setMinimumSize(new java.awt.Dimension(640, 640));
@@ -119,6 +121,13 @@ public class AnvandarMeny extends Page {
             }
         });
 
+        btnSubscriptions.setText("Prenumerationer");
+        btnSubscriptions.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSubscriptionsActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -132,19 +141,20 @@ public class AnvandarMeny extends Page {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(204, 204, 204)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(btnFormellBlogg, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btnKalender, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btnInformellBlogg, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btnKontouppgifter, javax.swing.GroupLayout.DEFAULT_SIZE, 203, Short.MAX_VALUE)))
-                    .addGroup(layout.createSequentialGroup()
                         .addGap(22, 22, 22)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lblNotiser)
                             .addComponent(btnDltNotification)
                             .addComponent(boxNotiser, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtNotification, javax.swing.GroupLayout.PREFERRED_SIZE, 534, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(txtNotification, javax.swing.GroupLayout.PREFERRED_SIZE, 534, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(204, 204, 204)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(btnFormellBlogg, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnKalender, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnInformellBlogg, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnKontouppgifter, javax.swing.GroupLayout.DEFAULT_SIZE, 203, Short.MAX_VALUE)
+                            .addComponent(btnSubscriptions, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addContainerGap(86, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -161,8 +171,10 @@ public class AnvandarMeny extends Page {
                 .addGap(18, 18, 18)
                 .addComponent(btnInformellBlogg)
                 .addGap(18, 18, 18)
+                .addComponent(btnSubscriptions)
+                .addGap(18, 18, 18)
                 .addComponent(btnKontouppgifter)
-                .addGap(175, 175, 175)
+                .addGap(135, 135, 135)
                 .addComponent(lblNotiser)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(boxNotiser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -170,7 +182,7 @@ public class AnvandarMeny extends Page {
                 .addComponent(txtNotification, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnDltNotification)
-                .addContainerGap(95, Short.MAX_VALUE))
+                .addContainerGap(127, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -195,27 +207,30 @@ public class AnvandarMeny extends Page {
         try {
             
             String valdNotis = boxNotiser.getSelectedItem().toString();
-            String idToRemove = app.getDataBaseConnection().fetchSingle("SELECT NOTIS_ID FROM NOTISER WHERE NOTIS_BESKRIVNING = '" + valdNotis + "'");
-        
+            //String idToRemove = app.getDataBaseConnection().fetchSingle("SELECT NOTIS_ID FROM NOTISER WHERE NOTIS_BESKRIVNING = '" + valdNotis + "'");
+            String idToRemove = app.getDataBaseConnection().fetchSingle("Select notiser.notis_id from notiser join skickad_notis on notiser.notis_id = skickad_notis.notis_id where anvandar_id = " + app.getCurrentUser() + "  and notis_beskrivning = '" + valdNotis + "'");
             if (idToRemove == null) {
-                boxNotiser.removeAllItems();
-                boxNotiser.addItem("Välj notis");
+                return;
                 
             }   else {
                     
                     app.getDataBaseConnection().delete("DELETE FROM SKICKAD_NOTIS WHERE NOTIS_ID = " + idToRemove);
-                    app.getDataBaseConnection().delete("DELETE FROM NOTISER WHERE NOTIS_ID = " + idToRemove);
+                    
         
                     updateInfo();
             }
         } catch (InfException e) {
-            System.err.println(e);
+            System.err.println(e.getMessage());
         }
     }//GEN-LAST:event_btnDltNotificationActionPerformed
 
     private void boxNotiserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boxNotiserActionPerformed
         updateNotificationText();
     }//GEN-LAST:event_boxNotiserActionPerformed
+
+    private void btnSubscriptionsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSubscriptionsActionPerformed
+        app.selectPage(16);
+    }//GEN-LAST:event_btnSubscriptionsActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -226,6 +241,7 @@ public class AnvandarMeny extends Page {
     private javax.swing.JButton btnKalender;
     private javax.swing.JButton btnKontouppgifter;
     private javax.swing.JButton btnLogout;
+    private javax.swing.JButton btnSubscriptions;
     private javax.swing.JLabel lblNotiser;
     private javax.swing.JLabel txtNotification;
     private javax.swing.JLabel txtProfile;
