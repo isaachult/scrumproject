@@ -96,6 +96,11 @@ public class AnvandarMeny extends Page {
         });
 
         btnKalender.setText("Kalender");
+        btnKalender.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnKalenderActionPerformed(evt);
+            }
+        });
 
         btnKontouppgifter.setText("Ändra kontouppgifter");
         btnKontouppgifter.addActionListener(new java.awt.event.ActionListener() {
@@ -216,6 +221,10 @@ public class AnvandarMeny extends Page {
     private void boxNotiserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boxNotiserActionPerformed
         updateNotificationText();
     }//GEN-LAST:event_boxNotiserActionPerformed
+
+    private void btnKalenderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnKalenderActionPerformed
+        app.selectPage(16);
+    }//GEN-LAST:event_btnKalenderActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

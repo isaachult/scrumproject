@@ -1,5 +1,7 @@
 package scrumproj;
 
+import java.awt.Image;
+import java.io.File;
 import javax.swing.JOptionPane;
 import oru.inf.InfException;
 import java.text.SimpleDateFormat;
@@ -7,6 +9,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import javax.swing.DefaultListModel;
+import javax.swing.ImageIcon;
+import javax.swing.JFileChooser;
 import javax.swing.table.DefaultTableModel;
 
 public class FormellBlogg extends Page {
@@ -21,7 +25,7 @@ public class FormellBlogg extends Page {
         
         
         try {
-            DefaultTableModel table = new DefaultTableModel(new Object[]{"ANVANDARE", "INLAGG", "DATUM"}, 0);
+            DefaultTableModel table = new DefaultTableModel(new Object[]{"ANVANDARE", "INLAGG", "DATUM",}, 0);
 
             ArrayList<HashMap<String, String>> allaRader = new ArrayList<>();
             allaRader = app.getDataBaseConnection().fetchRows("SELECT INLAGG_ID, ANVANDARE, INLAGG, DATUM FROM FORMELBLOGG");
@@ -31,6 +35,8 @@ public class FormellBlogg extends Page {
                 String anvandare = rad.get("ANVANDARE");
                 String inlagg = rad.get("INLAGG");
                 String datum = rad.get("DATUM");
+                
+                
                 
 
                 //Sätter in anvandare + inlagg + datum  i tabellen mha addRow()
@@ -169,10 +175,6 @@ public class FormellBlogg extends Page {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        app.selectPage(8);
-    }//GEN-LAST:event_jButton1ActionPerformed
-
     private void btnPubliceraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPubliceraActionPerformed
 
         //JAG HAR ÄNDRAT DATATYPE "TIME" FÖR TIDSTÄMPELN TILL "DATE" I DATABASEN //TOR
@@ -186,13 +188,17 @@ public class FormellBlogg extends Page {
             String date = simpleDateFormat.format(new Date());
             int anvandarId = app.getCurrentUser();
             String namn = app.getDataBaseConnection().fetchSingle("SELECT FORNAMN FROM ANVANDARE WHERE ANVANDAR_ID= '" + anvandarId + "'");
+            String filename = jTextField1.getText();
+         
+
+    
 
             String inlaggId = app.getDataBaseConnection().getAutoIncrement("FORMELBLOGG", "INLAGG_ID");
             if (inlaggId == null) {
                 inlaggId = "1";
             }
            
-            String dbStatment = app.getDataBaseConnection().fetchSingle("INSERT INTO FORMELBLOGG (ANVANDARE, INLAGG_ID, INLAGG, DATUM) VALUES ('"+namn+"', '"+inlaggId+"', '"+txt+"', '"+date+"');");
+            String dbStatment = app.getDataBaseConnection().fetchSingle("INSERT INTO FORMELBLOGG (ANVANDARE, INLAGG_ID, INLAGG, DATUM, BILD ) VALUES ('"+namn+"', '"+inlaggId+"', '"+txt+"', '"+date+"' '"+filename+"');");
             inlaggsArean.setText(null);
             JOptionPane.showMessageDialog(null, "Inlägg publicerat");
             updateInfo();
@@ -206,7 +212,7 @@ public class FormellBlogg extends Page {
     }//GEN-LAST:event_btnPubliceraActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
+     
     }//GEN-LAST:event_jButton2ActionPerformed
 
 
