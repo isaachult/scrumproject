@@ -19,6 +19,7 @@ public class SokAnvandare extends Page {
     String valdAnvandare;
     String anvandarId;
     
+    
     public SokAnvandare(Application app) {
         super(app);
         initComponents();
@@ -48,7 +49,7 @@ public class SokAnvandare extends Page {
                 String epost = app.getDataBaseConnection().fetchSingle("SELECT epost FROM anvandare WHERE anvandar_id = '" + id + "'");
                 
                 //cboxAnvandare.addItem(epost + " " + forNamn + " " + efterNamn);
-                cboxAnvandare.addItem(forNamn + " " + efterNamn);
+                cboxAnvandare.addItem(epost + " " + forNamn + " " + efterNamn);
             }
            
 
@@ -69,7 +70,9 @@ public class SokAnvandare extends Page {
             DefaultTableModel table = new DefaultTableModel(new Object[]{"ANVANDARE", "INLAGG", "DATUM"}, 0);
 
             ArrayList<HashMap<String, String>> allaRader = new ArrayList<>();
-           
+            
+            //anvandarId =  app.getDataBaseConnection().fetchSingle("SELECT anvandar_id FROM anvandare WHERE epost = '" + valdAnvandare + "'");
+            
             allaRader = app.getDataBaseConnection().fetchRows("SELECT INLAGG_ID, ANVANDARE, INLAGG, DATUM FROM FORMELBLOGG WHERE ANVANDARE = '" + valdAnvandare + "'");
             
             
@@ -216,13 +219,20 @@ public class SokAnvandare extends Page {
 
     private void btnSokActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSokActionPerformed
         // TODO add your handling code here:
-     
-        String s = cboxAnvandare.getSelectedItem().toString();
-        if (s.contains(" ")) {
+        
+        try {
+            String s = cboxAnvandare.getSelectedItem().toString();
+            if (s.contains(" ")) {
                 valdAnvandare = s.substring(0, s.indexOf(" "));
+            }
+            String fornamn = app.getDataBaseConnection().fetchSingle("SELECT fornamn FROM anvandare WHERE epost = '" + valdAnvandare + "'");
+            String efternamn = app.getDataBaseConnection().fetchSingle("SELECT efternamn FROM anvandare WHERE epost = '" + valdAnvandare + "'");
+            jLabel1.setText(fornamn + " " + efternamn + "s blogg");
+            updateInfo();
+        } catch (InfException e) {
+            JOptionPane.showMessageDialog(null, "Något är fel");
+            System.err.println(e);
         }
-        jLabel1.setText(valdAnvandare + "s blogg");
-        updateInfo();
         
         
         

@@ -256,7 +256,7 @@ public class FormellBlogg extends Page {
             SimpleDateFormat simpleDateFormat = new SimpleDateFormat(p);
             String date = simpleDateFormat.format(new Date());
             int anvandarId = app.getCurrentUser();
-            String namn = app.getDataBaseConnection().fetchSingle("SELECT FORNAMN FROM ANVANDARE WHERE ANVANDAR_ID= '" + anvandarId + "'");
+            String namn = app.getDataBaseConnection().fetchSingle("SELECT epost FROM ANVANDARE WHERE ANVANDAR_ID= '" + anvandarId + "'");
 
             String inlaggId = app.getDataBaseConnection().getAutoIncrement("FORMELBLOGG", "INLAGG_ID");
             if (inlaggId == null) {
