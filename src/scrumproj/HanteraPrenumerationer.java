@@ -55,6 +55,32 @@ public class HanteraPrenumerationer extends Page {
             } catch (NullPointerException npe) {
                 System.err.println(npe.getMessage());
             }
+            
+            fillCBoxes();
+    }
+    
+    public void fillCBoxes() {
+        ArrayList<String> allaAnvandare = null;
+        ArrayList<String> allaKategorier = null;
+            boxUser.removeAllItems();
+            boxCategory.removeAllItems();
+            try {
+            allaAnvandare = app.getDataBaseConnection().fetchColumn("SELECT ANVANDAR_ID FROM ANVANDARE");
+            allaKategorier = app.getDataBaseConnection().fetchColumn("SELECT KATEGORI_ID FROM KATEGORIER");
+             for (String id : allaAnvandare) {
+                 String ePost = app.getDataBaseConnection().fetchSingle("SELECT EPOST FROM ANVANDARE WHERE ANVANDAR_ID = '" + id + "'");
+                 boxUser.addItem(ePost);
+             }
+            
+             for (String id : allaKategorier) {
+                 String  kategoriNamn = app.getDataBaseConnection().fetchSingle("SELECT KATEGORINAMN FROM KATEGORIER WHERE KATEGORI_ID = '" + id + "'");
+                 boxCategory.addItem(kategoriNamn);
+             }
+            
+            
+            } catch (InfException e) {
+                System.err.println(e.getMessage());
+            }
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -76,6 +102,11 @@ public class HanteraPrenumerationer extends Page {
         btnBack = new javax.swing.JButton();
         btnRemoveCategory = new javax.swing.JButton();
         btnRemoveProfile = new javax.swing.JButton();
+        boxCategory = new javax.swing.JComboBox<>();
+        lblNewSubscription = new javax.swing.JLabel();
+        btnSubscribeCategory = new javax.swing.JButton();
+        btnSubscribeUser = new javax.swing.JButton();
+        boxUser = new javax.swing.JComboBox<>();
 
         setMaximumSize(new java.awt.Dimension(640, 640));
         setMinimumSize(new java.awt.Dimension(640, 640));
@@ -113,22 +144,32 @@ public class HanteraPrenumerationer extends Page {
             }
         });
 
+        boxCategory.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                boxCategoryActionPerformed(evt);
+            }
+        });
+
+        lblNewSubscription.setText("Prenumerera på:");
+
+        btnSubscribeCategory.setText("Starta prenumeration");
+        btnSubscribeCategory.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSubscribeCategoryActionPerformed(evt);
+            }
+        });
+
+        btnSubscribeUser.setText("Starta prenumeration");
+        btnSubscribeUser.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSubscribeUserActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(19, 19, 19)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel2)
-                    .addComponent(listCategory, javax.swing.GroupLayout.PREFERRED_SIZE, 225, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnRemoveCategory))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 149, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel3)
-                    .addComponent(btnRemoveProfile)
-                    .addComponent(listUser, javax.swing.GroupLayout.PREFERRED_SIZE, 225, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(22, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -138,6 +179,27 @@ public class HanteraPrenumerationer extends Page {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btnBack)
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(19, 19, 19)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel2)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(6, 6, 6)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(btnRemoveCategory)
+                            .addComponent(listCategory, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblNewSubscription)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addComponent(btnSubscribeCategory, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(boxCategory, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
+                .addGap(128, 128, 128)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnRemoveProfile)
+                    .addComponent(jLabel3)
+                    .addComponent(listUser, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(boxUser, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnSubscribeUser))
+                .addContainerGap(87, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -151,19 +213,32 @@ public class HanteraPrenumerationer extends Page {
                         .addComponent(btnBack)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lblYourSubscriptions)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 41, Short.MAX_VALUE)
+                .addGap(41, 41, 41)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(jLabel3))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(listUser, javax.swing.GroupLayout.DEFAULT_SIZE, 419, Short.MAX_VALUE)
+                    .addComponent(listUser, javax.swing.GroupLayout.DEFAULT_SIZE, 247, Short.MAX_VALUE)
                     .addComponent(listCategory))
-                .addGap(27, 27, 27)
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnRemoveCategory)
-                    .addComponent(btnRemoveProfile))
-                .addGap(51, 51, 51))
+                    .addComponent(btnRemoveProfile)
+                    .addComponent(btnRemoveCategory))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(44, 44, 44)
+                        .addComponent(lblNewSubscription))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(92, 92, 92)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(boxUser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(boxCategory, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(btnSubscribeUser)
+                            .addComponent(btnSubscribeCategory))))
+                .addContainerGap(78, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -216,14 +291,48 @@ public class HanteraPrenumerationer extends Page {
         }
     }//GEN-LAST:event_btnRemoveProfileActionPerformed
 
+    private void boxCategoryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boxCategoryActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_boxCategoryActionPerformed
+
+    private void btnSubscribeCategoryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSubscribeCategoryActionPerformed
+        
+        try {
+            String valdPrenumeration = boxCategory.getSelectedItem().toString();
+            String valdPrenumerationIndex = app.getDataBaseConnection().fetchSingle("SELECT KATEGORI_ID FROM KATEGORIER WHERE KATEGORINAMN = '" + valdPrenumeration + "'");
+            app.getDataBaseConnection().insert("INSERT INTO PRENUMERATION_KATEGORI VALUES (" + app.getCurrentUser() + ", " + valdPrenumerationIndex + ")");
+            updateInfo();
+        
+        } catch (InfException e) {
+            System.err.println(e.getMessage());
+        }
+    }//GEN-LAST:event_btnSubscribeCategoryActionPerformed
+
+    private void btnSubscribeUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSubscribeUserActionPerformed
+        try {
+            String valdPrenumeration = boxUser.getSelectedItem().toString();
+            String valdPrenumerationIndex = app.getDataBaseConnection().fetchSingle("SELECT ANVANDAR_ID FROM ANVANDARE WHERE EPOST = '" + valdPrenumeration + "'");
+            app.getDataBaseConnection().insert("INSERT INTO PRENUMERATION_PROFIL VALUES (" + app.getCurrentUser() + ", " + valdPrenumerationIndex + ")");
+            updateInfo();
+        
+        } catch (InfException e) {
+            System.err.println(e.getMessage());
+        }
+    }//GEN-LAST:event_btnSubscribeUserActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JComboBox<String> boxCategory;
+    private javax.swing.JComboBox<String> boxUser;
     private javax.swing.JButton btnBack;
     private javax.swing.JButton btnRemoveCategory;
     private javax.swing.JButton btnRemoveProfile;
+    private javax.swing.JButton btnSubscribeCategory;
+    private javax.swing.JButton btnSubscribeUser;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel lblName;
+    private javax.swing.JLabel lblNewSubscription;
     private javax.swing.JLabel lblYourSubscriptions;
     private javax.swing.JList<String> listAnvandare;
     private javax.swing.JScrollPane listCategory;
