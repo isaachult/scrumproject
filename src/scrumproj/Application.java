@@ -84,6 +84,7 @@ public class Application extends JFrame {
         addPage(new HanteraPrenumerationer(this)); //16
         
         
+        
                 setVisible(true);
     }
     
