@@ -17,7 +17,7 @@ import javax.swing.table.DefaultTableModel;
 public class SokAnvandare extends Page {
 
     String valdAnvandare;
-    int anvandarId;
+    String anvandarId;
     
     public SokAnvandare(Application app) {
         super(app);
@@ -46,6 +46,7 @@ public class SokAnvandare extends Page {
                 String forNamn = app.getDataBaseConnection().fetchSingle("SELECT fornamn FROM anvandare WHERE anvandar_id = '" + id + "'");
                 String efterNamn = app.getDataBaseConnection().fetchSingle("SELECT efternamn FROM anvandare WHERE anvandar_id = '" + id + "'");
                 String epost = app.getDataBaseConnection().fetchSingle("SELECT epost FROM anvandare WHERE anvandar_id = '" + id + "'");
+                
                 //cboxAnvandare.addItem(epost + " " + forNamn + " " + efterNamn);
                 cboxAnvandare.addItem(forNamn + " " + efterNamn);
             }
@@ -68,7 +69,9 @@ public class SokAnvandare extends Page {
             DefaultTableModel table = new DefaultTableModel(new Object[]{"ANVANDARE", "INLAGG", "DATUM"}, 0);
 
             ArrayList<HashMap<String, String>> allaRader = new ArrayList<>();
+           
             allaRader = app.getDataBaseConnection().fetchRows("SELECT INLAGG_ID, ANVANDARE, INLAGG, DATUM FROM FORMELBLOGG WHERE ANVANDARE = '" + valdAnvandare + "'");
+            
             
              if (allaRader != null) {
                  for (HashMap<String, String> rad : allaRader) {
