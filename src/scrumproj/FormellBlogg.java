@@ -188,7 +188,7 @@ public class FormellBlogg extends Page {
             String date = simpleDateFormat.format(new Date());
             int anvandarId = app.getCurrentUser();
             String namn = app.getDataBaseConnection().fetchSingle("SELECT FORNAMN FROM ANVANDARE WHERE ANVANDAR_ID= '" + anvandarId + "'");
-            String filename = jTextField1.getText();
+           
          
 
     
@@ -198,7 +198,7 @@ public class FormellBlogg extends Page {
                 inlaggId = "1";
             }
            
-            String dbStatment = app.getDataBaseConnection().fetchSingle("INSERT INTO FORMELBLOGG (ANVANDARE, INLAGG_ID, INLAGG, DATUM, BILD ) VALUES ('"+namn+"', '"+inlaggId+"', '"+txt+"', '"+date+"' '"+filename+"');");
+            String dbStatment = app.getDataBaseConnection().fetchSingle("INSERT INTO FORMELBLOGG (ANVANDARE, INLAGG_ID, INLAGG, DATUM, BILD ) VALUES ('"+namn+"', '"+inlaggId+"', '"+txt+"', '"+date+"');");
             inlaggsArean.setText(null);
             JOptionPane.showMessageDialog(null, "Inlägg publicerat");
             updateInfo();
