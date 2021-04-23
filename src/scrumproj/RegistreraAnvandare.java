@@ -16,7 +16,9 @@ public class RegistreraAnvandare extends Page {
     }
 
     @Override
-    public void updateInfo() { }
+    public void updateInfo() { 
+    lblConfirmChange.setText("");
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -43,8 +45,11 @@ public class RegistreraAnvandare extends Page {
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         administratorBox = new javax.swing.JCheckBox();
+        lblConfirmChange = new javax.swing.JLabel();
 
         setMaximumSize(new java.awt.Dimension(640, 640));
+        setMinimumSize(new java.awt.Dimension(640, 640));
+        setPreferredSize(new java.awt.Dimension(640, 640));
 
         jLabel1.setText("Epost");
 
@@ -100,7 +105,7 @@ public class RegistreraAnvandare extends Page {
             }
         });
 
-        jButton2.setText("Tillbaka till menyn");
+        jButton2.setText("Tillbaka");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);
@@ -109,45 +114,52 @@ public class RegistreraAnvandare extends Page {
 
         administratorBox.setText("Admin?");
 
+        lblConfirmChange.setText("lblConfirmChange");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
+                .addContainerGap(229, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel7)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel1)
-                                    .addComponent(jLabel2)
-                                    .addComponent(jLabel3)
-                                    .addComponent(jLabel4)
-                                    .addComponent(jLabel5)
-                                    .addComponent(jLabel6))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(administratorBox)
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                        .addComponent(FORNAMN)
-                                        .addComponent(LOSENORD, javax.swing.GroupLayout.DEFAULT_SIZE, 83, Short.MAX_VALUE)
-                                        .addComponent(EPOST)
-                                        .addComponent(EFTERNAMN, javax.swing.GroupLayout.Alignment.TRAILING)
-                                        .addComponent(TELEFONNUMMER)
-                                        .addComponent(ADRESS)))))
-                        .addContainerGap(440, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jButton1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(jButton2)
-                        .addGap(24, 24, 24))))
+                        .addGap(53, 53, 53))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblConfirmChange)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jLabel7)
+                                .addGroup(layout.createSequentialGroup()
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(jLabel1)
+                                        .addComponent(jLabel2)
+                                        .addComponent(jLabel3)
+                                        .addComponent(jLabel4)
+                                        .addComponent(jLabel5)
+                                        .addComponent(jLabel6))
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(administratorBox)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                            .addComponent(FORNAMN)
+                                            .addComponent(LOSENORD)
+                                            .addComponent(EPOST)
+                                            .addComponent(EFTERNAMN, javax.swing.GroupLayout.Alignment.TRAILING)
+                                            .addComponent(TELEFONNUMMER)
+                                            .addComponent(ADRESS, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGap(13, 13, 13))))
+                        .addGap(210, 210, 210))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(5, 5, 5)
+                .addContainerGap()
+                .addComponent(jButton2)
+                .addGap(86, 86, 86)
                 .addComponent(jLabel7)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -175,11 +187,11 @@ public class RegistreraAnvandare extends Page {
                     .addComponent(ADRESS, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(administratorBox)
-                .addGap(27, 27, 27)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(jButton2))
-                .addContainerGap(43, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(jButton1)
+                .addGap(18, 18, 18)
+                .addComponent(lblConfirmChange)
+                .addContainerGap(174, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -217,7 +229,7 @@ public class RegistreraAnvandare extends Page {
         id = "1";
     }
     String svar = app.getDataBaseConnection().fetchSingle("INSERT INTO ANVANDARE (ANVANDAR_ID, FORNAMN, EFTERNAMN, EPOST, LOSENORD, ADRESS, ADMINSTATUS, TELEFONNUMMER) VALUES ('"+id+"', '"+fornamn+"', '"+efternamn+"', '"+epost+"', '"+losenord+"', '"+adress+"', '"+"J"+"','"+telefon+"')");
-        JOptionPane.showMessageDialog(null, "Du har nu registrerat en ny användare!");
+        lblConfirmChange.setText("Den nya användaren har registrerats!");
   }
   else {
      String epost = EPOST.getText();
@@ -231,7 +243,7 @@ public class RegistreraAnvandare extends Page {
         id = "1";
     }
     String svar = app.getDataBaseConnection().fetchSingle("INSERT INTO ANVANDARE (ANVANDAR_ID, FORNAMN, EFTERNAMN, EPOST, LOSENORD, ADRESS, ADMINSTATUS, TELEFONNUMMER) VALUES ('"+id+"', '"+fornamn+"', '"+efternamn+"', '"+epost+"', '"+losenord+"', '"+adress+"', '"+"N"+"','"+telefon+"')");
-        JOptionPane.showMessageDialog(null, "Du har nu registrerat en ny användare!");
+        lblConfirmChange.setText("Den nya användaren har registrerats!");
   
   }
   
@@ -266,5 +278,6 @@ app.selectPage(1);        // TODO add your handling code here:
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel lblConfirmChange;
     // End of variables declaration//GEN-END:variables
 }

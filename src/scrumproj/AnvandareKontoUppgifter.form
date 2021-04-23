@@ -35,7 +35,6 @@
                   <Group type="102" attributes="0">
                       <EmptySpace min="-2" pref="113" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="lblCurrentPassword" min="-2" max="-2" attributes="0"/>
                           <Component id="lblChangePassword" min="-2" max="-2" attributes="0"/>
                           <Component id="lblNewPassword" alignment="0" min="-2" max="-2" attributes="0"/>
                           <Component id="lblConfirmPassword" alignment="0" min="-2" max="-2" attributes="0"/>
@@ -44,9 +43,10 @@
                               <Component id="txtOldPassword" alignment="0" pref="102" max="32767" attributes="0"/>
                               <Component id="txtNewPassword" alignment="0" max="32767" attributes="0"/>
                           </Group>
+                          <Component id="txtConfirmPassword" alignment="0" min="-2" pref="102" max="-2" attributes="0"/>
                           <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
-                              <Component id="btnConfirmPassWord" alignment="0" pref="102" max="32767" attributes="0"/>
-                              <Component id="txtConfirmPassword" alignment="0" max="32767" attributes="0"/>
+                              <Component id="btnConfirmPassWord" alignment="0" max="32767" attributes="0"/>
+                              <Component id="lblCurrentPassword" alignment="0" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                       <EmptySpace max="32767" attributes="0"/>
@@ -114,7 +114,7 @@
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="btnConfirmUserInformation" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="btnConfirmPassWord" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="btnConfirmPassWord" alignment="0" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
