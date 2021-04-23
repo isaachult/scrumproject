@@ -19,6 +19,7 @@ public class TaBortAnvandare extends Page {
 
     @Override
     public void updateInfo() { 
+        andradInfo.setText("");
      String fraga = "Select fornamn from anvandare";
      
 
@@ -55,8 +56,13 @@ public class TaBortAnvandare extends Page {
         jLabel1 = new javax.swing.JLabel();
         ValjAnvandare = new javax.swing.JComboBox<>();
         jButton1 = new javax.swing.JButton();
+        andradInfo = new javax.swing.JLabel();
+        jButton2 = new javax.swing.JButton();
 
-        jLabel1.setText("Vänligen välj användare att ta bort");
+        setMaximumSize(new java.awt.Dimension(640, 640));
+        setMinimumSize(new java.awt.Dimension(640, 640));
+
+        jLabel1.setText("Vänligen välj en användare att ta bort");
 
         ValjAnvandare.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -71,28 +77,52 @@ public class TaBortAnvandare extends Page {
             }
         });
 
+        andradInfo.setText("jLabel2");
+
+        jButton2.setText("Tillbaka");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
+                .addContainerGap(214, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1)
-                    .addComponent(jButton1)
-                    .addComponent(ValjAnvandare, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(189, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel1)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(27, 27, 27)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jButton1)
+                                    .addComponent(ValjAnvandare, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGap(209, 209, 209))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(andradInfo, javax.swing.GroupLayout.PREFERRED_SIZE, 202, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(197, 197, 197))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jButton2)
+                        .addGap(32, 32, 32))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
+                .addComponent(jButton2)
+                .addGap(129, 129, 129)
                 .addComponent(jLabel1)
                 .addGap(18, 18, 18)
                 .addComponent(ValjAnvandare, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jButton1)
-                .addContainerGap(185, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(andradInfo)
+                .addContainerGap(336, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -101,9 +131,8 @@ public class TaBortAnvandare extends Page {
         String valtNamn = ValjAnvandare.getSelectedItem().toString();
         String anvandarId = app.getDataBaseConnection().fetchSingle("Select anvandar_id from anvandare where fornamn ='" + valtNamn + "'");
         app.getDataBaseConnection().delete("delete from anvandare where anvandar_id ='"+ anvandarId + "'");
-        JOptionPane.showMessageDialog(null, "Användaren har tagits bort!");
         updateInfo();
-        
+        andradInfo.setText ("Användaren har tagits bort!");
     }   
     
     catch (InfException e)
@@ -117,10 +146,16 @@ public class TaBortAnvandare extends Page {
        
     }//GEN-LAST:event_ValjAnvandareActionPerformed
 
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+     app.selectPage(app.getPreviousPage());
+    }//GEN-LAST:event_jButton2ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox<String> ValjAnvandare;
+    private javax.swing.JLabel andradInfo;
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     // End of variables declaration//GEN-END:variables
 }
