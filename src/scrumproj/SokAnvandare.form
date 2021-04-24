@@ -28,8 +28,10 @@
                           <Component id="cboxAnvandare" alignment="0" min="-2" max="-2" attributes="0"/>
                           <Component id="btnSok" alignment="0" min="-2" pref="57" max="-2" attributes="0"/>
                           <Component id="lblValjAnvandare" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="btnFormell" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="btnInformell" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace pref="204" max="32767" attributes="0"/>
+                      <EmptySpace pref="178" max="32767" attributes="0"/>
                       <Component id="jScrollPane1" min="-2" pref="250" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="41" max="-2" attributes="0"/>
                   </Group>
@@ -53,7 +55,11 @@
                       <Component id="lblValjAnvandare" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Component id="cboxAnvandare" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <Component id="btnFormell" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="btnInformell" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="11" max="-2" attributes="0"/>
                       <Component id="btnSok" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <Component id="jScrollPane1" min="-2" pref="287" max="-2" attributes="0"/>
@@ -123,6 +129,16 @@
     <Component class="javax.swing.JLabel" name="jLabel1">
       <Properties>
         <Property name="text" type="java.lang.String" value="jLabel1"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JRadioButton" name="btnFormell">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Formell blogg"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JRadioButton" name="btnInformell">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Informell blogg"/>
       </Properties>
     </Component>
   </SubComponents>
