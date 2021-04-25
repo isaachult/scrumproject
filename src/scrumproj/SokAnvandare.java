@@ -19,13 +19,14 @@ public class SokAnvandare extends Page {
 
     String valdAnvandare;
     String anvandarId;
-    DefaultTableModel table;
+    //DefaultTableModel table;
     
     
     public SokAnvandare(Application app) {
         super(app);
         initComponents();
         jLabel1.setText("");
+        lblBlogg.setText("");
         
     }
     
@@ -40,7 +41,7 @@ public class SokAnvandare extends Page {
         buttonGroup.add(btnFormell);
         buttonGroup.add(btnInformell);
         
-        btnFormell.setSelected(true);
+        //btnFormell.setSelected(true);
         
         
         
@@ -74,38 +75,35 @@ public class SokAnvandare extends Page {
         
         if (btnFormell.isSelected())
         {
-        
-         try {
-             
-             
-            
-            table = new DefaultTableModel(new Object[]{"ANVANDARE", "INLAGG", "DATUM"}, 0);
+        try {
+            lblBlogg.setText("");
+            ArrayList<HashMap<String, String>> allaRader;
 
-            ArrayList<HashMap<String, String>> allaRader = new ArrayList<>();
-            
-            //anvandarId =  app.getDataBaseConnection().fetchSingle("SELECT anvandar_id FROM anvandare WHERE epost = '" + valdAnvandare + "'");
-            
-            allaRader = app.getDataBaseConnection().fetchRows("SELECT INLAGG_ID, ANVANDARE, INLAGG, DATUM FROM FORMELBLOGG WHERE ANVANDARE = '" + valdAnvandare + "'");
-            
-            
-             if (allaRader != null) {
-                 for (HashMap<String, String> rad : allaRader) {
-                     String inlagg_id = rad.get("INLAGG_ID");
-                     String anvandare = rad.get("ANVANDARE");
-                     String inlagg = rad.get("INLAGG");
-                     String datum = rad.get("DATUM");
+            DefaultTableModel table = new DefaultTableModel(new Object[]{"Användare", "Inlägg", "Datum", "InläggId", "Fil", "Kategori"}, 0);
 
-                     //Sätter in anvandare + inlagg + datum  i tabellen mha addRow()
-                     table.addRow(new Object[]{anvandare, inlagg, datum});
-                 }
-             }
+            allaRader = app.getDataBaseConnection().fetchRows("SELECT INLAGG_ID, EPOST, INLAGG, DATUM, PATH, KATEGORI FROM FORMELBLOGG WHERE EPOST = '" + valdAnvandare + "'");
+            if (allaRader == null) {
+                table.addRow(new Object[]{null, null, null, null});
+            } else {
+                for (HashMap<String, String> rad : allaRader) {
+                    String inlagg_id = rad.get("INLAGG_ID");
+                    String epost = rad.get("EPOST");
+                    String inlagg = rad.get("INLAGG");
+                    String datum = rad.get("DATUM");
+                    String path = rad.get("PATH");
+                    String kat = rad.get("KATEGORI");
+
+                    //Sätter in anvandare + inlagg + datum  i tabellen mha addRow()
+                    table.addRow(new Object[]{epost, inlagg, datum, inlagg_id, path, kat});
+
+                }
+            }
 
             //Säger att tblInlagg ska använda sig av den modellen vi skapade ovan
             tblInlagg.setModel(table);
 
             //Sätter defaultEditor till Object.class, null för att data i tabellen inte ska kunna redigeras, men kunna selekteras.
             tblInlagg.setDefaultEditor(Object.class, null);
-
             //Stänger av möjligheten att ändra kolumnordningen.
             tblInlagg.getTableHeader().setReorderingAllowed(false);
 
@@ -114,45 +112,47 @@ public class SokAnvandare extends Page {
             tblInlagg.getColumnModel().getColumn(3).setMinWidth(0);
             tblInlagg.getColumnModel().getColumn(3).setMaxWidth(0);
             tblInlagg.getColumnModel().getColumn(3).setWidth(0);
+            tblInlagg.getColumnModel().getColumn(1).setWidth(10);
+            // tblInlagg.getColumnModel().getColumn(1).setWidth(3);
 
         } catch (InfException e) {
             JOptionPane.showMessageDialog(null, "Något är fel");
             System.err.println(e);
+
         }
+         
         }
         else if (btnInformell.isSelected())
         {
             try {
-             
-             
-            
-            table = new DefaultTableModel(new Object[]{"ANVANDARE", "INLAGG", "DATUM"}, 0);
+                lblBlogg.setText("");
+            ArrayList<HashMap<String, String>> allaRader;
 
-            ArrayList<HashMap<String, String>> allaRader = new ArrayList<>();
-            
-            //anvandarId =  app.getDataBaseConnection().fetchSingle("SELECT anvandar_id FROM anvandare WHERE epost = '" + valdAnvandare + "'");
-            
-            allaRader = app.getDataBaseConnection().fetchRows("SELECT INLAGG_ID, ANVANDARE, INLAGG, DATUM FROM FORMELBLOGG WHERE ANVANDARE = '" + valdAnvandare + "'");
-            
-            
-             if (allaRader != null) {
-                 for (HashMap<String, String> rad : allaRader) {
-                     String inlagg_id = rad.get("INLAGG_ID");
-                     String anvandare = rad.get("ANVANDARE");
-                     String inlagg = rad.get("INLAGG");
-                     String datum = rad.get("DATUM");
+            DefaultTableModel table = new DefaultTableModel(new Object[]{"Användare", "Inlägg", "Datum", "InläggId", "Fil", "Kategori"}, 0);
 
-                     //Sätter in anvandare + inlagg + datum  i tabellen mha addRow()
-                     table.addRow(new Object[]{anvandare, inlagg, datum});
-                 }
-             }
+            allaRader = app.getDataBaseConnection().fetchRows("SELECT INLAGG_ID, EPOST, INLAGG, DATUM, PATH, KATEGORI FROM INFORMELLBLOGG WHERE EPOST = '" + valdAnvandare + "'");
+            if (allaRader == null) {
+                table.addRow(new Object[]{null, null, null, null});
+            } else {
+                for (HashMap<String, String> rad : allaRader) {
+                    String inlagg_id = rad.get("INLAGG_ID");
+                    String epost = rad.get("EPOST");
+                    String inlagg = rad.get("INLAGG");
+                    String datum = rad.get("DATUM");
+                    String path = rad.get("PATH");
+                    String kat = rad.get("KATEGORI");
+
+                    //Sätter in anvandare + inlagg + datum  i tabellen mha addRow()
+                    table.addRow(new Object[]{epost, inlagg, datum, inlagg_id, path, kat});
+
+                }
+            }
 
             //Säger att tblInlagg ska använda sig av den modellen vi skapade ovan
             tblInlagg.setModel(table);
 
             //Sätter defaultEditor till Object.class, null för att data i tabellen inte ska kunna redigeras, men kunna selekteras.
             tblInlagg.setDefaultEditor(Object.class, null);
-
             //Stänger av möjligheten att ändra kolumnordningen.
             tblInlagg.getTableHeader().setReorderingAllowed(false);
 
@@ -161,11 +161,20 @@ public class SokAnvandare extends Page {
             tblInlagg.getColumnModel().getColumn(3).setMinWidth(0);
             tblInlagg.getColumnModel().getColumn(3).setMaxWidth(0);
             tblInlagg.getColumnModel().getColumn(3).setWidth(0);
+            tblInlagg.getColumnModel().getColumn(1).setWidth(10);
+            // tblInlagg.getColumnModel().getColumn(1).setWidth(3);
 
         } catch (InfException e) {
             JOptionPane.showMessageDialog(null, "Något är fel");
             System.err.println(e);
+
         }
+        }
+        else
+        {
+            //JOptionPane.showMessageDialog(null, "Du måste välja vilken typ av blogg du vill se");
+            lblBlogg.setText("Du måste välja vilken typ av blogg du vill se");
+            return;
         }
         
 
@@ -202,6 +211,7 @@ public class SokAnvandare extends Page {
         jLabel1 = new javax.swing.JLabel();
         btnFormell = new javax.swing.JRadioButton();
         btnInformell = new javax.swing.JRadioButton();
+        lblBlogg = new javax.swing.JLabel();
 
         cboxAnvandare.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
@@ -240,6 +250,8 @@ public class SokAnvandare extends Page {
 
         btnInformell.setText("Informell blogg");
 
+        lblBlogg.setText("jLabel2");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -256,7 +268,8 @@ public class SokAnvandare extends Page {
                             .addComponent(btnSok, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(lblValjAnvandare)
                             .addComponent(btnFormell)
-                            .addComponent(btnInformell))
+                            .addComponent(btnInformell)
+                            .addComponent(lblBlogg))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 178, Short.MAX_VALUE)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(41, 41, 41))))
@@ -281,7 +294,9 @@ public class SokAnvandare extends Page {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnInformell)
                         .addGap(11, 11, 11)
-                        .addComponent(btnSok))
+                        .addComponent(btnSok)
+                        .addGap(18, 18, 18)
+                        .addComponent(lblBlogg))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 287, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(128, 128, 128)
                 .addComponent(btnTillbaka)
@@ -354,6 +369,7 @@ public class SokAnvandare extends Page {
     private javax.swing.JComboBox<String> cboxAnvandare;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel lblBlogg;
     private javax.swing.JLabel lblValjAnvandare;
     private javax.swing.JTable tblInlagg;
     // End of variables declaration//GEN-END:variables
