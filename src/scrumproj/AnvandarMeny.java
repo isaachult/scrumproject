@@ -72,6 +72,7 @@ public class AnvandarMeny extends Page {
         btnDltNotification = new javax.swing.JButton();
         txtNotification = new javax.swing.JLabel();
         btnSubscriptions = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
 
         setMaximumSize(new java.awt.Dimension(640, 640));
         setMinimumSize(new java.awt.Dimension(640, 640));
@@ -133,6 +134,13 @@ public class AnvandarMeny extends Page {
             }
         });
 
+        jButton1.setText("Sök användare");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -159,7 +167,8 @@ public class AnvandarMeny extends Page {
                             .addComponent(btnKalender, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(btnInformellBlogg, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(btnKontouppgifter, javax.swing.GroupLayout.DEFAULT_SIZE, 203, Short.MAX_VALUE)
-                            .addComponent(btnSubscriptions, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                            .addComponent(btnSubscriptions, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addContainerGap(86, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -179,7 +188,9 @@ public class AnvandarMeny extends Page {
                 .addComponent(btnSubscriptions)
                 .addGap(18, 18, 18)
                 .addComponent(btnKontouppgifter)
-                .addGap(135, 135, 135)
+                .addGap(18, 18, 18)
+                .addComponent(jButton1)
+                .addGap(94, 94, 94)
                 .addComponent(lblNotiser)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(boxNotiser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -241,6 +252,10 @@ public class AnvandarMeny extends Page {
         app.selectPage(17);
     }//GEN-LAST:event_btnKalenderActionPerformed
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        app.selectPage(5);
+    }//GEN-LAST:event_jButton1ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox<String> boxNotiser;
@@ -251,6 +266,7 @@ public class AnvandarMeny extends Page {
     private javax.swing.JButton btnKontouppgifter;
     private javax.swing.JButton btnLogout;
     private javax.swing.JButton btnSubscriptions;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel lblNotiser;
     private javax.swing.JLabel txtNotification;
     private javax.swing.JLabel txtProfile;

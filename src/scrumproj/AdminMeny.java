@@ -1,5 +1,6 @@
 package scrumproj;
 
+import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import oru.inf.InfException;
 
@@ -17,12 +18,37 @@ public class AdminMeny extends Page {
     int inloggadId = app.getCurrentUser();
     String namn = app.getDataBaseConnection().fetchSingle("SELECT FORNAMN FROM ANVANDARE WHERE ANVANDAR_ID= '" + inloggadId + "'"); 
     jLabel1.setText("Välkommen" + " " +namn+ "!");
-    }
-        catch(InfException e) {
+    
+       ArrayList<String> allaNotiser = app.getDataBaseConnection().fetchColumn("SELECT NOTIS_BESKRIVNING FROM NOTISER JOIN SKICKAD_NOTIS ON NOTISER.NOTIS_ID = SKICKAD_NOTIS.NOTIS_ID WHERE ANVANDAR_ID = " + inloggadId);
+            boxNotiser.removeAllItems();
+            boxNotiser.addItem("Välj notis");
             
+            
+            if(allaNotiser != null) {
+                for (String notiser : allaNotiser) {      
+                    boxNotiser.addItem(notiser);
+                }
+            }
+        } catch(InfException e) {
+            System.err.println(e.getMessage());
         }
+ 
     
     }
+    
+    
+    
+    
+    public void updateNotificationText () {
+        try {
+        String notificationText = boxNotiser.getSelectedItem().toString();
+        txtNotification.setText(notificationText); 
+        } catch (NullPointerException e) {
+            System.out.println("Finns inga notiser att visa");
+            System.err.println(e.getMessage());
+        }
+    }
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -44,6 +70,10 @@ public class AdminMeny extends Page {
         jToggleButton2 = new javax.swing.JToggleButton();
         jButton7 = new javax.swing.JButton();
         jButton8 = new javax.swing.JButton();
+        lblNotiser = new javax.swing.JLabel();
+        boxNotiser = new javax.swing.JComboBox<>();
+        txtNotification = new javax.swing.JLabel();
+        btnDltNotification = new javax.swing.JButton();
 
         setMaximumSize(new java.awt.Dimension(640, 640));
         setMinimumSize(new java.awt.Dimension(640, 640));
@@ -116,29 +146,59 @@ public class AdminMeny extends Page {
             }
         });
 
+        lblNotiser.setText("Notiser");
+
+        boxNotiser.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        boxNotiser.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                boxNotiserActionPerformed(evt);
+            }
+        });
+
+        txtNotification.setText("jLabel2");
+
+        btnDltNotification.setText("Ta bort notis");
+        btnDltNotification.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDltNotificationActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton3)
-                .addGap(48, 48, 48))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(236, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(jButton6, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton4, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jToggleButton1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jToggleButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(227, 227, 227))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButton3)
+                        .addGap(48, 48, 48))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(60, 60, 60)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(lblNotiser)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 155, Short.MAX_VALUE)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addComponent(jButton6, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jButton4, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jToggleButton1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jButton2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jButton1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jToggleButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jButton5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jButton7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jButton8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addGap(227, 227, 227))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(txtNotification)
+                                    .addComponent(boxNotiser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(btnDltNotification))
+                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -164,8 +224,16 @@ public class AdminMeny extends Page {
                 .addGap(18, 18, 18)
                 .addComponent(jButton7)
                 .addGap(18, 18, 18)
-                .addComponent(jButton8)
-                .addContainerGap(147, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton8)
+                    .addComponent(lblNotiser))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(boxNotiser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(txtNotification)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnDltNotification)
+                .addContainerGap(99, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -207,8 +275,35 @@ public class AdminMeny extends Page {
          app.selectPage(16);
     }//GEN-LAST:event_jButton8ActionPerformed
 
+    private void btnDltNotificationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDltNotificationActionPerformed
+        try {
+            
+            String valdNotis = boxNotiser.getSelectedItem().toString();
+            //String idToRemove = app.getDataBaseConnection().fetchSingle("SELECT NOTIS_ID FROM NOTISER WHERE NOTIS_BESKRIVNING = '" + valdNotis + "'");
+            String idToRemove = app.getDataBaseConnection().fetchSingle("Select notiser.notis_id from notiser join skickad_notis on notiser.notis_id = skickad_notis.notis_id where anvandar_id = " + app.getCurrentUser() + "  and notis_beskrivning = '" + valdNotis + "'");
+            if (idToRemove == null) {
+                return;
+                
+            }   else {
+                    
+                    app.getDataBaseConnection().delete("DELETE FROM SKICKAD_NOTIS WHERE NOTIS_ID = " + idToRemove);
+                    
+        
+                    updateInfo();
+            }
+        } catch (InfException e) {
+            System.err.println(e.getMessage());
+        }
+    }//GEN-LAST:event_btnDltNotificationActionPerformed
+
+    private void boxNotiserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boxNotiserActionPerformed
+        updateNotificationText();
+    }//GEN-LAST:event_boxNotiserActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JComboBox<String> boxNotiser;
+    private javax.swing.JButton btnDltNotification;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
@@ -220,6 +315,8 @@ public class AdminMeny extends Page {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JToggleButton jToggleButton1;
     private javax.swing.JToggleButton jToggleButton2;
+    private javax.swing.JLabel lblNotiser;
+    private javax.swing.JLabel txtNotification;
     // End of variables declaration//GEN-END:variables
 
     

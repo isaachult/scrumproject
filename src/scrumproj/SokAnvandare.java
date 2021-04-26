@@ -9,6 +9,7 @@ import javax.swing.JOptionPane;
 import oru.inf.InfException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import javax.swing.ButtonGroup;
 import javax.swing.table.DefaultTableModel;
 /**
  *
@@ -17,12 +18,15 @@ import javax.swing.table.DefaultTableModel;
 public class SokAnvandare extends Page {
 
     String valdAnvandare;
-    int anvandarId;
+    String anvandarId;
+    //DefaultTableModel table;
+    
     
     public SokAnvandare(Application app) {
         super(app);
         initComponents();
         jLabel1.setText("");
+        lblBlogg.setText("");
         
     }
     
@@ -33,6 +37,15 @@ public class SokAnvandare extends Page {
         //jLabel1.setText(valdAnvandare + "s blogg");
         
 
+        ButtonGroup buttonGroup = new ButtonGroup();
+        buttonGroup.add(btnFormell);
+        buttonGroup.add(btnInformell);
+        
+        //btnFormell.setSelected(true);
+        
+        
+        
+        
         ArrayList<String> allaAnvandare;
             cboxAnvandare.removeAllItems();
             
@@ -46,8 +59,9 @@ public class SokAnvandare extends Page {
                 String forNamn = app.getDataBaseConnection().fetchSingle("SELECT fornamn FROM anvandare WHERE anvandar_id = '" + id + "'");
                 String efterNamn = app.getDataBaseConnection().fetchSingle("SELECT efternamn FROM anvandare WHERE anvandar_id = '" + id + "'");
                 String epost = app.getDataBaseConnection().fetchSingle("SELECT epost FROM anvandare WHERE anvandar_id = '" + id + "'");
+                
                 //cboxAnvandare.addItem(epost + " " + forNamn + " " + efterNamn);
-                cboxAnvandare.addItem(forNamn + " " + efterNamn);
+                cboxAnvandare.addItem(epost + " " + forNamn + " " + efterNamn);
             }
            
 
@@ -59,35 +73,37 @@ public class SokAnvandare extends Page {
         }
         
         
-        
-        
-         try {
-             
-             
-            
-            DefaultTableModel table = new DefaultTableModel(new Object[]{"ANVANDARE", "INLAGG", "DATUM"}, 0);
+        if (btnFormell.isSelected())
+        {
+        try {
+            lblBlogg.setText("");
+            ArrayList<HashMap<String, String>> allaRader;
 
-            ArrayList<HashMap<String, String>> allaRader = new ArrayList<>();
-            allaRader = app.getDataBaseConnection().fetchRows("SELECT INLAGG_ID, ANVANDARE, INLAGG, DATUM FROM FORMELBLOGG WHERE ANVANDARE = '" + valdAnvandare + "'");
-            
-             if (allaRader != null) {
-                 for (HashMap<String, String> rad : allaRader) {
-                     String inlagg_id = rad.get("INLAGG_ID");
-                     String anvandare = rad.get("ANVANDARE");
-                     String inlagg = rad.get("INLAGG");
-                     String datum = rad.get("DATUM");
+            DefaultTableModel table = new DefaultTableModel(new Object[]{"Användare", "Inlägg", "Datum", "InläggId", "Fil", "Kategori"}, 0);
 
-                     //Sätter in anvandare + inlagg + datum  i tabellen mha addRow()
-                     table.addRow(new Object[]{anvandare, inlagg, datum});
-                 }
-             }
+            allaRader = app.getDataBaseConnection().fetchRows("SELECT INLAGG_ID, EPOST, INLAGG, DATUM, PATH, KATEGORI FROM FORMELBLOGG WHERE EPOST = '" + valdAnvandare + "'");
+            if (allaRader == null) {
+                table.addRow(new Object[]{null, null, null, null});
+            } else {
+                for (HashMap<String, String> rad : allaRader) {
+                    String inlagg_id = rad.get("INLAGG_ID");
+                    String epost = rad.get("EPOST");
+                    String inlagg = rad.get("INLAGG");
+                    String datum = rad.get("DATUM");
+                    String path = rad.get("PATH");
+                    String kat = rad.get("KATEGORI");
+
+                    //Sätter in anvandare + inlagg + datum  i tabellen mha addRow()
+                    table.addRow(new Object[]{epost, inlagg, datum, inlagg_id, path, kat});
+
+                }
+            }
 
             //Säger att tblInlagg ska använda sig av den modellen vi skapade ovan
             tblInlagg.setModel(table);
 
             //Sätter defaultEditor till Object.class, null för att data i tabellen inte ska kunna redigeras, men kunna selekteras.
             tblInlagg.setDefaultEditor(Object.class, null);
-
             //Stänger av möjligheten att ändra kolumnordningen.
             tblInlagg.getTableHeader().setReorderingAllowed(false);
 
@@ -96,10 +112,69 @@ public class SokAnvandare extends Page {
             tblInlagg.getColumnModel().getColumn(3).setMinWidth(0);
             tblInlagg.getColumnModel().getColumn(3).setMaxWidth(0);
             tblInlagg.getColumnModel().getColumn(3).setWidth(0);
+            tblInlagg.getColumnModel().getColumn(1).setWidth(10);
+            // tblInlagg.getColumnModel().getColumn(1).setWidth(3);
 
         } catch (InfException e) {
             JOptionPane.showMessageDialog(null, "Något är fel");
             System.err.println(e);
+
+        }
+         
+        }
+        else if (btnInformell.isSelected())
+        {
+            try {
+                lblBlogg.setText("");
+            ArrayList<HashMap<String, String>> allaRader;
+
+            DefaultTableModel table = new DefaultTableModel(new Object[]{"Användare", "Inlägg", "Datum", "InläggId", "Fil", "Kategori"}, 0);
+
+            allaRader = app.getDataBaseConnection().fetchRows("SELECT INLAGG_ID, EPOST, INLAGG, DATUM, PATH, KATEGORI FROM INFORMELLBLOGG WHERE EPOST = '" + valdAnvandare + "'");
+            if (allaRader == null) {
+                table.addRow(new Object[]{null, null, null, null});
+            } else {
+                for (HashMap<String, String> rad : allaRader) {
+                    String inlagg_id = rad.get("INLAGG_ID");
+                    String epost = rad.get("EPOST");
+                    String inlagg = rad.get("INLAGG");
+                    String datum = rad.get("DATUM");
+                    String path = rad.get("PATH");
+                    String kat = rad.get("KATEGORI");
+
+                    //Sätter in anvandare + inlagg + datum  i tabellen mha addRow()
+                    table.addRow(new Object[]{epost, inlagg, datum, inlagg_id, path, kat});
+
+                }
+            }
+
+            //Säger att tblInlagg ska använda sig av den modellen vi skapade ovan
+            tblInlagg.setModel(table);
+
+            //Sätter defaultEditor till Object.class, null för att data i tabellen inte ska kunna redigeras, men kunna selekteras.
+            tblInlagg.setDefaultEditor(Object.class, null);
+            //Stänger av möjligheten att ändra kolumnordningen.
+            tblInlagg.getTableHeader().setReorderingAllowed(false);
+
+            //Sätter bredden på kolumnen som innehåller ID till 0px.
+            //Vi vill inte att ID ska visas i listan men vill eventueltl kunna använda IDt 
+            tblInlagg.getColumnModel().getColumn(3).setMinWidth(0);
+            tblInlagg.getColumnModel().getColumn(3).setMaxWidth(0);
+            tblInlagg.getColumnModel().getColumn(3).setWidth(0);
+            tblInlagg.getColumnModel().getColumn(1).setWidth(10);
+            // tblInlagg.getColumnModel().getColumn(1).setWidth(3);
+
+        } catch (InfException e) {
+            JOptionPane.showMessageDialog(null, "Något är fel");
+            System.err.println(e);
+
+        }
+        }
+        else
+        {
+            //JOptionPane.showMessageDialog(null, "Du måste välja vilken typ av blogg du vill se");
+            lblBlogg.setText("Du måste välja vilken typ av blogg du vill se");
+            return;
         }
         
 
@@ -134,6 +209,9 @@ public class SokAnvandare extends Page {
         jScrollPane1 = new javax.swing.JScrollPane();
         tblInlagg = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
+        btnFormell = new javax.swing.JRadioButton();
+        btnInformell = new javax.swing.JRadioButton();
+        lblBlogg = new javax.swing.JLabel();
 
         cboxAnvandare.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
@@ -168,6 +246,12 @@ public class SokAnvandare extends Page {
 
         jLabel1.setText("jLabel1");
 
+        btnFormell.setText("Formell blogg");
+
+        btnInformell.setText("Informell blogg");
+
+        lblBlogg.setText("jLabel2");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -182,8 +266,11 @@ public class SokAnvandare extends Page {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(cboxAnvandare, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(btnSok, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lblValjAnvandare))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 204, Short.MAX_VALUE)
+                            .addComponent(lblValjAnvandare)
+                            .addComponent(btnFormell)
+                            .addComponent(btnInformell)
+                            .addComponent(lblBlogg))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 178, Short.MAX_VALUE)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(41, 41, 41))))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
@@ -202,8 +289,14 @@ public class SokAnvandare extends Page {
                         .addComponent(lblValjAnvandare)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(cboxAnvandare, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btnFormell)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnInformell)
+                        .addGap(11, 11, 11)
+                        .addComponent(btnSok)
                         .addGap(18, 18, 18)
-                        .addComponent(btnSok))
+                        .addComponent(lblBlogg))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 287, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(128, 128, 128)
                 .addComponent(btnTillbaka)
@@ -213,13 +306,25 @@ public class SokAnvandare extends Page {
 
     private void btnSokActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSokActionPerformed
         // TODO add your handling code here:
-     
-        String s = cboxAnvandare.getSelectedItem().toString();
-        if (s.contains(" ")) {
+        
+        try {
+            String s = cboxAnvandare.getSelectedItem().toString();
+            if (s.contains(" ")) {
                 valdAnvandare = s.substring(0, s.indexOf(" "));
+            }
+            String fornamn = app.getDataBaseConnection().fetchSingle("SELECT fornamn FROM anvandare WHERE epost = '" + valdAnvandare + "'");
+            String efternamn = app.getDataBaseConnection().fetchSingle("SELECT efternamn FROM anvandare WHERE epost = '" + valdAnvandare + "'");
+            if (btnFormell.isSelected()) {
+                jLabel1.setText(fornamn + " " + efternamn + "s formella blogg");
+
+            } else if (btnInformell.isSelected()) {
+                jLabel1.setText(fornamn + " " + efternamn + "s informella blogg");
+            }
+            updateInfo();
+        } catch (InfException e) {
+            JOptionPane.showMessageDialog(null, "Något är fel");
+            System.err.println(e);
         }
-        jLabel1.setText(valdAnvandare + "s blogg");
-        updateInfo();
         
         
         
@@ -257,11 +362,14 @@ public class SokAnvandare extends Page {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JRadioButton btnFormell;
+    private javax.swing.JRadioButton btnInformell;
     private javax.swing.JButton btnSok;
     private javax.swing.JButton btnTillbaka;
     private javax.swing.JComboBox<String> cboxAnvandare;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel lblBlogg;
     private javax.swing.JLabel lblValjAnvandare;
     private javax.swing.JTable tblInlagg;
     // End of variables declaration//GEN-END:variables
