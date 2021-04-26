@@ -122,11 +122,9 @@ public class FormellBlogg extends Page {
         jScrollPane1 = new javax.swing.JScrollPane();
         tblInlagg = new javax.swing.JTable();
         cboxKategori = new javax.swing.JComboBox<>();
-        lblKategori = new javax.swing.JLabel();
         btnKommentera = new javax.swing.JButton();
         lblKat = new javax.swing.JLabel();
         cboxInlaggen = new javax.swing.JComboBox<>();
-        jLabel2 = new javax.swing.JLabel();
         lblKategorin = new javax.swing.JLabel();
         txtFaltInlagg = new javax.swing.JTextField();
         btnHamntaKommentarer = new javax.swing.JButton();
@@ -140,6 +138,7 @@ public class FormellBlogg extends Page {
         btnTaBortInlagg = new javax.swing.JButton();
         btnBifoga = new javax.swing.JButton();
         txtFieldPath = new javax.swing.JTextField();
+        jLabel3 = new javax.swing.JLabel();
 
         btnPublicera.setText("Publicera inlägg");
         btnPublicera.addActionListener(new java.awt.event.ActionListener() {
@@ -193,7 +192,7 @@ public class FormellBlogg extends Page {
 
         cboxKategori.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
-        btnKommentera.setText("Kommentera valt inlägg");
+        btnKommentera.setText("Kommentera inlägg");
         btnKommentera.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnKommenteraActionPerformed(evt);
@@ -208,8 +207,6 @@ public class FormellBlogg extends Page {
                 cboxInlaggenActionPerformed(evt);
             }
         });
-
-        jLabel2.setText("Välj inlägg:");
 
         btnHamntaKommentarer.setText("Hämta kommentarer");
         btnHamntaKommentarer.addActionListener(new java.awt.event.ActionListener() {
@@ -247,7 +244,7 @@ public class FormellBlogg extends Page {
 
         jLabel1.setText("Redigera inlägg:");
 
-        btnLaggTIllKategori.setText("Lägg till ny kategori");
+        btnLaggTIllKategori.setText("Lägg till kategori");
         btnLaggTIllKategori.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnLaggTIllKategoriActionPerformed(evt);
@@ -268,51 +265,60 @@ public class FormellBlogg extends Page {
             }
         });
 
+        jLabel3.setText("Hantera inlägg:");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(txtFieldPath, javax.swing.GroupLayout.PREFERRED_SIZE, 256, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(layout.createSequentialGroup()
-                            .addContainerGap()
-                            .addComponent(btnTillbaka))
-                        .addGroup(layout.createSequentialGroup()
-                            .addGap(25, 25, 25)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 346, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                            .addContainerGap()
-                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 346, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(lblKategorin, javax.swing.GroupLayout.PREFERRED_SIZE, 348, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addContainerGap()
+                                        .addComponent(btnTillbaka))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(25, 25, 25)
+                                        .addComponent(txtFieldPath, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGap(270, 270, 270)))
+                        .addGap(35, 35, 35))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 394, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblKat, javax.swing.GroupLayout.PREFERRED_SIZE, 212, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(btnTaBortInlagg, javax.swing.GroupLayout.PREFERRED_SIZE, 212, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(lblKategori, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
+                        .addGap(2, 2, 2)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lblKategorin, javax.swing.GroupLayout.PREFERRED_SIZE, 307, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addGroup(layout.createSequentialGroup()
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                        .addComponent(btnHamta, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(btnBekrafta, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGap(3, 3, 3))
+                                .addComponent(txtInlagg, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 213, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(cboxKategori, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addComponent(btnTaBortInlagg, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnHamntaKommentarer, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 172, Short.MAX_VALUE)
+                        .addComponent(btnKommentera, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(cboxInlaggen, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(btnLaggTIllKategori)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 213, Short.MAX_VALUE)
-                                .addComponent(txtInlagg, javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(btnHamta)
-                                .addComponent(btnBekrafta, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(btnLaggTIllKategori, javax.swing.GroupLayout.PREFERRED_SIZE, 212, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addComponent(btnBifoga, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(cboxKategori, javax.swing.GroupLayout.Alignment.LEADING, 0, 212, Short.MAX_VALUE)
-                                .addComponent(cboxInlaggen, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jButton3)
                                 .addComponent(txtFaltInlagg)
-                                .addComponent(btnPublicera, javax.swing.GroupLayout.DEFAULT_SIZE, 212, Short.MAX_VALUE)
-                                .addComponent(btnHamntaKommentarer, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                                .addComponent(btnKommentera, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(lblKat, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jButton3)))
-                        .addGap(0, 242, Short.MAX_VALUE)))
-                .addContainerGap())
+                                .addComponent(btnBifoga, javax.swing.GroupLayout.DEFAULT_SIZE, 172, Short.MAX_VALUE)
+                                .addComponent(btnPublicera)))))
+                .addContainerGap(365, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -321,55 +327,48 @@ public class FormellBlogg extends Page {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton3)
                     .addComponent(btnTillbaka))
-                .addGap(2, 2, 2)
-                .addComponent(txtFieldPath, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(lblKategorin, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 344, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(cboxInlaggen, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(lblKat)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(cboxKategori, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnLaggTIllKategori)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(txtFaltInlagg, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(8, 8, 8)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnBifoga)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnPublicera)
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel3)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnKommentera)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(66, 66, 66)
-                                .addComponent(lblKategori))
-                            .addGroup(layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btnHamntaKommentarer)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btnLaggTIllKategori))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(66, 66, 66)
-                                .addComponent(btnTaBortInlagg)))
+                        .addComponent(cboxInlaggen, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jLabel1)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 495, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(btnKommentera)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnHamntaKommentarer)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnTaBortInlagg)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 46, Short.MAX_VALUE)
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(txtInlagg, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGap(4, 4, 4)
                         .addComponent(btnHamta)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(lblKategorin)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGap(5, 5, 5)
                         .addComponent(btnBekrafta)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addGap(64, 64, 64))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 344, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addComponent(txtFieldPath, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(421, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -404,7 +403,7 @@ public class FormellBlogg extends Page {
             }
             if (!Validering.tfHarVarde(txtFaltInlagg)) {
 
-                lblKategori.setText("Vänligen lämna inte rutan tom.");
+                lblKategorin.setText("Vänligen lämna inte rutan tom.");
             }
 
             if (Validering.tfHarVarde(txtFaltInlagg)) {
@@ -414,7 +413,18 @@ public class FormellBlogg extends Page {
                 updateInfo();
 
             }
-
+            ArrayList<String> hittadePrenumeranter = app.getDataBaseConnection().fetchColumn("SELECT ANVANDAR_ID FROM PRENUMERATION_PROFIL WHERE PROFIL_ID = " + app.getCurrentUser());
+            
+            if(hittadePrenumeranter == null){
+            return;
+            
+            }
+        else{
+            
+            for (String prenumeranter : hittadePrenumeranter) {
+            app.getDataBaseConnection().insert("INSERT INTO SKICKAD_NOTIS VALUES (" + prenumeranter + ",1)");
+            }
+                }
         } catch (InfException e) {
             JOptionPane.showMessageDialog(null, "Något är fel");
             System.err.println(e);
@@ -429,10 +439,6 @@ public class FormellBlogg extends Page {
     private void btnTillbakaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTillbakaActionPerformed
         app.selectPage(4);
     }//GEN-LAST:event_btnTillbakaActionPerformed
-
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton3ActionPerformed
 
     private void cboxInlaggenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboxInlaggenActionPerformed
         // TODO add your handling code here:
@@ -481,6 +487,10 @@ public class FormellBlogg extends Page {
             ArrayList<HashMap<String, String>> allaKommentarer;
             
             String inlagget = cboxInlaggen.getSelectedItem().toString();
+         //   if(inlagget.isEmpty(){
+           //     lblKa
+            
+            //}
             String inlagg = app.getDataBaseConnection().fetchSingle("SELECT INLAGG_ID FROM FORMELBLOGG WHERE INLAGG = '" + inlagget + "'");
 
             DefaultTableModel table = new DefaultTableModel(new Object[]{"Användare", "Kommentar", "Datum"}, 0);
@@ -505,6 +515,9 @@ public class FormellBlogg extends Page {
             tblKommentarer.setDefaultEditor(Object.class, null);
             //Stänger av möjligheten att ändra kolumnordningen.
             tblKommentarer.getTableHeader().setReorderingAllowed(false);
+            } catch (NullPointerException e) {
+            System.out.println("Finns inga kommentarer att ta hämta!");
+            System.err.println(e.getMessage());
 
         } catch (InfException e) {
             JOptionPane.showMessageDialog(null, "Något är fel");
@@ -515,7 +528,7 @@ public class FormellBlogg extends Page {
 
     private void btnBekraftaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBekraftaActionPerformed
         if (cboxInlaggen.getItemCount() == 0) {
-            lblKategori.setText("Välj ett inlägg!");
+            lblKategorin.setText("Välj ett inlägg!");
         } else {
         try {
             String valtInlagg = cboxInlaggen.getSelectedItem().toString();
@@ -523,12 +536,12 @@ public class FormellBlogg extends Page {
             String nyttInlagg = txtInlagg.getText();
 
              if (Validering.tfIsTomt(txtInlagg)) {
-                    lblKategori.setText("Vänligen lämna inte rutan tom.");
+                    lblKategorin.setText("Vänligen lämna inte rutan tom.");
                 }
            
              if (!Validering.tfIsTomt(txtInlagg)) {
                 app.getDataBaseConnection().update("UPDATE FORMELBLOGG SET INLAGG = '" + nyttInlagg + "' WHERE INLAGG_ID = " + inlaggId + "");
-                lblKategori.setText("Uppdatering av inlägget lyckades!");
+                lblKategorin.setText("Uppdatering av inlägget lyckades!");
             
             }
 
@@ -542,7 +555,7 @@ public class FormellBlogg extends Page {
 
     private void btnHamtaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHamtaActionPerformed
         if (cboxInlaggen.getItemCount() == 0) {
-            lblKategori.setText("Välj ett inlägg!");
+            lblKategorin.setText("Välj ett inlägg!");
         } else {
             try {
 
@@ -581,30 +594,35 @@ public class FormellBlogg extends Page {
 
     private void btnTaBortInlaggActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTaBortInlaggActionPerformed
 
-         if(tblInlagg.getSelectedColumn() == 1)
-        {
-        try{        
-         int row = tblInlagg.getSelectedRow();
-         String text = tblInlagg.getModel().getValueAt(row, 1).toString();
-       
+        if (tblInlagg.getSelectedColumn() == 1) {
+            try {
+                int row = tblInlagg.getSelectedRow();
+                
+                String text = tblInlagg.getModel().getValueAt(row, 1).toString();
+
+               
+                    int id = Integer.parseInt(app.getDataBaseConnection().fetchSingle("SELECT INLAGG_ID FROM FORMELBLOGG WHERE INLAGG='" + text + "'"));
+                    app.getDataBaseConnection().delete("DELETE FROM FORMELBLOGG WHERE INLAGG_ID=" + id);
+                    JOptionPane.showMessageDialog(null, "Inlägg raderat");
+
+                    updateInfo();
+
+                
+            } catch (NullPointerException e) {
+            System.out.println("Finns inga inlägg att ta bort");
+            System.err.println(e.getMessage());
         
-         int id = Integer.parseInt(app.getDataBaseConnection().fetchSingle("SELECT INLAGG_ID FROM FORMELBLOGG WHERE INLAGG='"+text+"'"));
-         app.getDataBaseConnection().delete("DELETE FROM FORMELBLOGG WHERE INLAGG_ID="+ id);
-         JOptionPane.showMessageDialog(null, "Inlägg raderat");
-         updateInfo(); 
-         } 
-        
-        
-         catch (InfException e) {
-            JOptionPane.showMessageDialog(null, "Något är fel");
+            } catch (InfException e) {
+                JOptionPane.showMessageDialog(null, "Något är fel");
+            }
         }
-        }
-         
+
 
     }//GEN-LAST:event_btnTaBortInlaggActionPerformed
 
     private void btnBifogaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBifogaActionPerformed
-       JFileChooser fil = new JFileChooser();
+      
+      JFileChooser fil = new JFileChooser();
       fil.showOpenDialog(this);
       File f = fil.getSelectedFile();
       if(f != null){
@@ -617,20 +635,26 @@ public class FormellBlogg extends Page {
     private void tblInlaggMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblInlaggMouseClicked
         if(tblInlagg.getSelectedColumn() == 4)
         {
-        
+        try{
         int row = tblInlagg.getSelectedRow();
         String value = (tblInlagg.getModel().getValueAt(row,4).toString());
-        try{
+        
             
         Runtime.getRuntime().exec("rundll32 url.dll,FileProtocolHandler " +value);
-       } catch (IOException ex) {
-            JOptionPane.showMessageDialog(null, "Något är fel");
-        }
-        }else{
-        
+       
+            } catch (NullPointerException e) {
+                System.out.println("Det finns ingen fil att hämta");
+                System.err.println(e.getMessage());
+            } catch (IOException ex) {
+                JOptionPane.showMessageDialog(null, "Något är fel");
+            }
         }
 
     }//GEN-LAST:event_tblInlaggMouseClicked
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton3ActionPerformed
  
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -647,11 +671,10 @@ public class FormellBlogg extends Page {
     private javax.swing.JComboBox<String> cboxKategori;
     private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JLabel lblKat;
-    private javax.swing.JLabel lblKategori;
     private javax.swing.JLabel lblKategorin;
     private javax.swing.JTable tblInlagg;
     private javax.swing.JTable tblKommentarer;
