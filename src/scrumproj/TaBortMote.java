@@ -33,7 +33,6 @@ public class TaBortMote extends Page {
         } catch (InfException e) {
             JOptionPane.showMessageDialog(null, e);
         } catch (Exception ettUndantag) {
-            JOptionPane.showMessageDialog(null, "Ett fel uppstod!");
             System.out.println("Internt felmeddelande" + ettUndantag.getMessage());
         }
     }

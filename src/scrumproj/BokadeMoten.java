@@ -52,8 +52,12 @@ public class BokadeMoten extends Page {
             //tblMoten.getColumnModel().getColumn(3).setWidth(0);
 
         } catch (InfException e) {
-            JOptionPane.showMessageDialog(null, "Du har för tillfället inga bokade möten!");
+            JOptionPane.showMessageDialog(null, "Något gick fel!");
             System.err.println(e);
+        }
+        catch (NullPointerException e) {
+            System.out.println("Du har inga bokade möten!");
+            System.err.println(e.getMessage());
         }
     }
 
