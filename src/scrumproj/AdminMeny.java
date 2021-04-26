@@ -138,6 +138,11 @@ public class AdminMeny extends Page {
         });
 
         jButton7.setText("Informell blogg");
+        jButton7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton7ActionPerformed(evt);
+            }
+        });
 
         jButton8.setText("Prenumerationer");
         jButton8.addActionListener(new java.awt.event.ActionListener() {
@@ -299,6 +304,10 @@ public class AdminMeny extends Page {
     private void boxNotiserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boxNotiserActionPerformed
         updateNotificationText();
     }//GEN-LAST:event_boxNotiserActionPerformed
+
+    private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
+      app.selectPage(7);
+    }//GEN-LAST:event_jButton7ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

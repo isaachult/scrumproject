@@ -430,7 +430,18 @@ public class InformellBlogg extends Page {
     }//GEN-LAST:event_tblInlaggPropertyChange
 
     private void btnTillbakaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTillbakaActionPerformed
-        app.selectPage(4);
+                  try {
+        String adminstatus = app.getDataBaseConnection().fetchSingle("SELECT ADMINSTATUS FROM ANVANDARE WHERE ANVANDAR_ID = " + app.getCurrentUser() );
+       
+if (adminstatus.equals("J")) {
+app.selectPage(1);
+} else {
+app.selectPage(4);
+        }
+       }
+     catch(InfException e) {
+                
+                }
     }//GEN-LAST:event_btnTillbakaActionPerformed
 
     private void cboxInlaggenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboxInlaggenActionPerformed
