@@ -116,7 +116,18 @@ public class BokadeMoten extends Page {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-       app.selectPage(13);
+            try {
+        String adminstatus = app.getDataBaseConnection().fetchSingle("SELECT ADMINSTATUS FROM ANVANDARE WHERE ANVANDAR_ID = " + app.getCurrentUser() );
+       
+if (adminstatus.equals("J")) {
+app.selectPage(1);
+} else {
+app.selectPage(4);
+        }
+       }
+     catch(InfException e) {
+                
+                }
     }//GEN-LAST:event_jButton1ActionPerformed
 
 

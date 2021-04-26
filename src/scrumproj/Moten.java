@@ -121,7 +121,18 @@ public class Moten extends Page {
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-         app.selectPage(app.getPreviousPage());
+       try {
+        String adminstatus = app.getDataBaseConnection().fetchSingle("SELECT ADMINSTATUS FROM ANVANDARE WHERE ANVANDAR_ID = " + app.getCurrentUser() );
+       
+if (adminstatus.equals("J")) {
+app.selectPage(1);
+} else {
+app.selectPage(4);
+        }
+       }
+     catch(InfException e) {
+                
+                }
     }//GEN-LAST:event_jButton4ActionPerformed
 
 
