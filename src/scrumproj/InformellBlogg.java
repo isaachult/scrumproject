@@ -117,7 +117,6 @@ public class InformellBlogg extends Page {
 
         btnPublicera = new javax.swing.JButton();
         btnTillbaka = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblInlagg = new javax.swing.JTable();
         cboxKategori = new javax.swing.JComboBox<>();
@@ -150,13 +149,6 @@ public class InformellBlogg extends Page {
         btnTillbaka.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnTillbakaActionPerformed(evt);
-            }
-        });
-
-        jButton3.setText("Profil");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
             }
         });
 
@@ -292,7 +284,6 @@ public class InformellBlogg extends Page {
                                 .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                                     .addGap(25, 25, 25)
                                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                        .addComponent(jButton3)
                                         .addComponent(cboxKategori, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addComponent(btnPublicera))))
                             .addGroup(layout.createSequentialGroup()
@@ -323,9 +314,7 @@ public class InformellBlogg extends Page {
                         .addComponent(lblKategorin, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jButton3)
-                            .addComponent(btnTillbaka))))
+                        .addComponent(btnTillbaka)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
@@ -635,6 +624,7 @@ app.selectPage(4);
          
          
          int id = Integer.parseInt(app.getDataBaseConnection().fetchSingle("SELECT INLAGG_ID FROM INFORMELLBLOGG WHERE INLAGG='"+text+"'"));
+         app.getDataBaseConnection().delete("DELETE FROM KOMMENTARINFORMELL WHERE INLAGG_ID = " + id);
          app.getDataBaseConnection().delete("DELETE FROM INFORMELLBLOGG WHERE INLAGG_ID = "+ id);
          JOptionPane.showMessageDialog(null, "Inlägg raderat");
          updateInfo(); 
@@ -651,10 +641,6 @@ app.selectPage(4);
         
     }//GEN-LAST:event_btnTaBortInlaggActionPerformed
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton3ActionPerformed
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBekrafta;
@@ -668,7 +654,6 @@ app.selectPage(4);
     private javax.swing.JButton btnTillbaka;
     private javax.swing.JComboBox<String> cboxInlaggen;
     private javax.swing.JComboBox<String> cboxKategori;
-    private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;

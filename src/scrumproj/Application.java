@@ -134,5 +134,5 @@ public class Application extends JFrame {
     }
     public int getCurrentUser() {
         return currentUser;
-    }
+    }  
 }

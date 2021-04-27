@@ -130,6 +130,10 @@ public class TaBortAnvandare extends Page {
     try {
         String valtNamn = ValjAnvandare.getSelectedItem().toString();
         String anvandarId = app.getDataBaseConnection().fetchSingle("Select anvandar_id from anvandare where fornamn ='" + valtNamn + "'");
+        app.getDataBaseConnection().delete("delete from prenumeration_kategori where anvandar_id ='" + anvandarId + "'");
+        app.getDataBaseConnection().delete("delete from prenumeration_profil where anvandar_id ='" + anvandarId + "'");
+        app.getDataBaseConnection().delete("delete from skickad_notis where anvandar_id ='" + anvandarId + "'");
+        app.getDataBaseConnection().delete("delete from bokade_moten where anvandar_id ='" + anvandarId + "'");
         app.getDataBaseConnection().delete("delete from anvandare where anvandar_id ='"+ anvandarId + "'");
         updateInfo();
         andradInfo.setText ("Användaren har tagits bort!");
